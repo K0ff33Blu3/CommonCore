@@ -1,5 +1,5 @@
 #include <stdarg.h>
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -8,7 +8,7 @@ int	ft_printf(const char *format, ...)
 	int	i;
 	
 	i = 0;
-	while (format[i])
+	while (*format)
 	{
 		if (*format == '%' && *(format + 1))
 		{
@@ -35,20 +35,19 @@ int	ft_printf(const char *format, ...)
 				ft_putchar('%');
 			format++;
 		}
-		ft_putchar(*format);
-		format++;	
+		if (*format)
+		{
+			ft_putchar(*format);
+			format++;
+		}
 	}
 	return (i);
 }
-
+/*
 int	main(void)
 {
-	char *str = "Milva";
-	int integer = -28;
-	unsigned int u_int = 98;
-	char letter = 'M';
-	void *ptr = &str;
-	ft_printf("Stringa: %s\nIntero: %i\nDecimale: %d\nEsadecimale minuscolo: %x\nEsadecimale maiuscolo: %X\nCarattere: %c\nPointer: %p\nUnsigned: %u\n", str, integer, integer, integer, integer, letter, ptr, u_int);
-	ft_printf("Sono solo una stringa");
+	ft_printf(" %c %c %c \n", 0, '1', '2');
+	printf(" %c %c %c ", 0, '1', '2');
 	return 0;
-}	
+}
+*/

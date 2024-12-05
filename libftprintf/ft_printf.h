@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:36:48 by miricci           #+#    #+#             */
-/*   Updated: 2024/12/04 17:50:18 by miricci          ###   ########.fr       */
+/*   Updated: 2024/12/05 19:12:24 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft/libft.h"
 
 void    ft_putptr(void *ptr);
-void	ft_putchar(char c);
+int	ft_putchar(char c);
 void	ft_putnbr(int	nbr);
 void	ft_putstr(const char *s);
 void	ft_putnbr_HEX(int nbr);
