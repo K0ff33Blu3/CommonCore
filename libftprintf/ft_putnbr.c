@@ -3,31 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:01:49 by miricci           #+#    #+#             */
-/*   Updated: 2024/12/03 14:02:12 by miricci          ###   ########.fr       */
+/*   Updated: 2024/12/08 18:34:58 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr(int	nbr)
+int	ft_putnbr(int nbr)
 {
+	int	i;
+
+	i = 0;
 	if (nbr < 0)
 	{
-		ft_putchar('-');
+		i += ft_putchar('-');
 		nbr *= -1;
 	}
 	if (nbr == -2147483648)
 	{
 		ft_putstr("2147483648");
-		return ;
+		return (11);
 	}
 	if (nbr >= 10)
-		ft_putnbr(nbr / 10);
+	{
+		i += ft_putnbr(nbr / 10);
+	}
 	nbr = (nbr % 10) + 48;
-	ft_putchar(nbr);
+	i += ft_putchar(nbr);
+	return (i);
 }
 /*
 int	main()

@@ -3,40 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:12:54 by miricci           #+#    #+#             */
-/*   Updated: 2024/12/05 19:00:36 by miricci          ###   ########.fr       */
+/*   Updated: 2024/12/08 20:14:37 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 
-int	ft_putnbr_hex(int nbr)
+int	ft_putnbr_hex(unsigned long nbr, char c)
 {
-	char	*set;
+	char	*set_lo;
+	char	*set_up;
 	int		i;
-	
-	set = "0123456789abcdef";
-	if (nbr < 0)
+
+	i = 0;
+	set_lo = "0123456789abcdef";
+	set_up = "0123456789ABCDEF";
+	if (c == 'x')
 	{
-		ft_putchar('-');
-		nbr = -nbr;
+		if (nbr >= 16)
+			i += ft_putnbr_hex((nbr / 16), 'x');
+		i += ft_putchar(set_lo[nbr % 16]);
 	}
-	if (nbr == -2147483648)
-		ft_putnbr_hex(-(nbr / 16));
-	if (nbr >= 16)
+	else if (c == 'X')
 	{
-		i++;
-		ft_putnbr_hex(nbr / 16);
+		if (nbr >= 16)
+			i += ft_putnbr_hex((nbr / 16), 'X');
+		i += ft_putchar(set_up[nbr % 16]);
 	}
-	ft_putchar(set[nbr % 16]);
-	return (i++)
+	return (i);
 }
 /*
 int	main()
 {
-	ft_putnbr_hex(-2147483648);
+	int i = ft_putnbr_hex(LONG_MIN);
+	//int h = printf("\n%x\n", LONG_MIN);
+	ft_putchar('\n');
+	ft_putnbr(i);
+	//ft_putnbr(h);
+	ft_putchar('\n');
 	return 0;
 }
 */

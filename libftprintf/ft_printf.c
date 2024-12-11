@@ -1,53 +1,66 @@
-#include <stdarg.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/04 15:12:54 by miricci           #+#    #+#             */
+/*   Updated: 2024/12/08 20:14:37 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "ft_printf.h"
+
+static int	print_type(const int c, va_list args)
+{
+	if (c == 'c')
+		return (ft_putchar(va_arg(args, int)));
+	if (c == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	if (c == 'd')
+		return (ft_putnbr(va_arg(args, int)));
+	if (c == 'i')
+		return (ft_putnbr(va_arg(args, int)));
+	if (c == 'u')
+		return (ft_putnbr_unsigned(va_arg(args, unsigned int)));
+	if (c == 'x' || c == 'X')
+		return (ft_putnbr_hex(va_arg(args, unsigned int), c));
+	if (c == 'i')
+		return (ft_putnbr(va_arg(args, int)));
+	if (c == 'p')
+		return (ft_putptr(va_arg(args, void *)));
+	if (c == '%')
+		return (ft_putchar('%'));
+	return (0);
+}
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	args;
-	va_start(args, format);
-	int	i;
-	
+	va_list		args;
+	int			i;
+
 	i = 0;
+	va_start(args, format);
 	while (*format)
 	{
 		if (*format == '%' && *(format + 1))
 		{
 			format++;
-			if (*format == 'c')
-				ft_putchar(va_arg(args, int));
-			else if (*format == 's')
-				ft_putstr(va_arg(args, char *));
-			else if (*format == 'd')
-				ft_putnbr(va_arg(args, int));
-			else if (*format == 'i')
-				ft_putnbr(va_arg(args, int));
-			else if (*format == 'u')
-				ft_putnbr_unsigned(va_arg(args, unsigned int));
-			else if (*format == 'x')
-				ft_putnbr_hex(va_arg(args, int));
-			else if (*format == 'X')
-				ft_putnbr_HEX(va_arg(args, int));
-			else if (*format == 'i')
-				ft_putnbr(va_arg(args, int));
-			else if (*format == 'p')
-				ft_putptr(va_arg(args, void *));
-			else if (*format == '%')
-				ft_putchar('%');
-			format++;
+			i += print_type(*format, args);
 		}
-		if (*format)
-		{
-			ft_putchar(*format);
-			format++;
-		}
+		else
+			i += ft_putchar(*format);
+		format++;
 	}
 	return (i);
 }
 /*
-int	main(void)
+int	main()
 {
-	ft_printf(" %c %c %c \n", 0, '1', '2');
-	printf(" %c %c %c ", 0, '1', '2');
+	int j = printf(" %x ", -10);
+	printf("\n");
+	int i = ft_printf(" %x ", -10);
+	printf("\nreturn value ft_printf: %d\nreturn value printf: %d\n", i, j);
 	return 0;
 }
 */

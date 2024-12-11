@@ -3,71 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 16:00:22 by miricci           #+#    #+#             */
-/*   Updated: 2024/12/05 16:26:23 by miricci          ###   ########.fr       */
+/*   Created: 2024/12/04 15:12:54 by miricci           #+#    #+#             */
+/*   Updated: 2024/12/08 20:14:37 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
-void	ft_rev_int_tab(char *tab)
+int	ft_putptr(void *ptr)
 {
-	char	buffer;
-    	int size;
-	int	i;
+	unsigned long	address;
+	int				i;
 
 	i = 0;
-    	size = ft_strlen(tab);
-	while (i < size / 2)
-	{
-		buffer = tab[i];
-		tab[i] = tab[size - 1 - i];
-		tab[size -1 - i] = buffer;
-		i++;
-	}
-}
-
-static char  *to_hex(unsigned long long nbr)
-{
-    char	*set;
-    char    *hex;
-    int     i;
-	
-    i = 0;
-	set = "0123456789abcdef";
-    hex = (char *)malloc (sizeof(char) * 16);
-    if (!hex)
-    {
-        return (NULL);
-    }
-	while (nbr > 0)
-    {
-		hex[i] = set[nbr % 16];
-        nbr /= 16;
-        i++;
-    }
-    ft_strlcat(hex, "x0", ft_strlen(hex) + 3);
-    ft_rev_int_tab(hex);
-    i += 2;
-    hex[i] = '\0';
-    return (hex);
-}
-
-void    ft_putptr(void *ptr)
-{
-    unsigned long long   address;
-
-    address = (unsigned long long)ptr;
-    ft_putstr(to_hex(address));
-    free(to_hex(address));
+	address = (unsigned long)ptr;
+	if (!address)
+		return (ft_putstr("(nil)"));
+	i += ft_putstr("0x");
+	i += ft_putnbr_hex(address, 'x');
+	return (i);
 }
 /*
 int main()
 {
-    char a = 'A';
-    ft_putptr(&a);
+    int i = ft_putptr((void *)LONG_MIN);
+    printf("\n");
+    int j = ft_putptr((void *)LONG_MAX);
+    printf("\nLONG_MIN: %p\nLONG_MAX: %p", (void *)LONG_MIN, (void *)LONG_MAX);
+    printf("\n%d\n%d\n", i, j);
     return (0);
 }
 */
