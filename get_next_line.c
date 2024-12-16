@@ -1,70 +1,61 @@
+/*					---		CONFRONTO TRA BUFFERSIZE		---							*/
+/**/
+
 #include "get_next_line.h"
-#include <string.h>
+
+char	*get_buffer(int fd, char *buffer)
+{
+	char	*tmp;
+	int	bytes_read;
+	
+	buffer = ft_strdup("");
+	tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	while (!ft_strchr(tmp, '\n'))
+	{
+		bytes_read = read(fd, tmp, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (NULL);
+		buffer = ft_strjoin(buffer, tmp);
+	}
+	free(tmp);
+	return (buffer);
+}
+
+char	*extract_line(static char *buffer)
+{
+	char	*line;
+	
+	while(buffer[i] != '\n')
+		i++;
+	line = ft_memcpy(line)
+	
+		
+		
 
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	//static char	*cumulative_buffer;
-	char	c[1];
-	int	i;
-	int	bytes_read;
+	//char	*line;
 	
-	i = 0;
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+	if (fd == -1 || fd == 0)
 		return (NULL);
-	c[0] = '0';
-	while (c[0] != '\n')
-	{
-		while (i < BUFFER_SIZE)
-		{
-			bytes_read = read(fd, c, 1);
-			if(bytes_read == -1)
-			{
-				printf("%d\n", bytes_read);
-				free(buffer);
-				return (NULL);
-			}
-			if (bytes_read == 0)
-				break ;
-			buffer[i++] = c[0];
-		}
-		if (i >= BUFFER_SIZE)
-		{
-			bytes_read = read(fd, c, 1);
-			if(bytes_read == -1)
-			{
-				printf("%d\n", bytes_read);
-				free(buffer);
-				return (NULL);
-			}
-			if (bytes_read == 0)
-				break ;
-			buffer[i++] = c[0];
-		}
-	}
-	if (i == 0)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	buffer[i] = 0;
+	buffer = get_buffer(fd, buffer);
 	return (buffer);
 }
 
 int	main()
 {
-	int fd = open("prova.txt", O_RDONLY);
-	char *buffer = get_next_line(fd); 
-	printf("%s", buffer);
-	free(buffer);
-	buffer = get_next_line(fd);
-	printf("%s", buffer);
-	free(buffer);
-	buffer = get_next_line(fd);
-	printf("%s", buffer);
-	free(buffer);
-	//printf("%s", get_next_line(fd));
-	//printf("%d", i);
+	int	fd;
+	char	*line;
+	
+	fd = open("prova.txt", O_RDONLY);
+	printf("fd: %d\n", fd);
+	printf("test\n");
+	line = get_next_line(fd);
+	printf("line: %s\n", line);
+	free(line);
+	line = get_next_line(fd);
+	printf("line: %s\n", line);
 	return 0;
 }
+
