@@ -12,14 +12,15 @@ static void	close_all(t_pipex pipex)
 static void	first_child(t_pipex pipex, char *cmd, char *infile, char **envp)
 {
 	pipex.cmd_args = str_split(cmd, ' ');
-	pipex.cmd = pipex.cmd_args[0];
+	pipex.cmd = ft_strdup(pipex.cmd_args[0]);
 	pipex.cmd_path = find_cmd_path(pipex.cmd_args[0], envp);
-	pipex.cmd_args[0] = pipex.cmd_path;
+	free(pipex.cmd_args[0]);
+	pipex.cmd_args[0] = ft_strdup(pipex.cmd_path);
 	if (access(infile, R_OK) == -1)
 	{
 		ft_free(pipex.cmd_args, -1);
 		free(pipex.cmd_path);
-		perror("inputv");
+		perror("input");
 		exit(EXIT_FAILURE);
 	}
 	dup2(pipex.in_fd, STDIN_FILENO);
@@ -37,6 +38,8 @@ static void	first_child(t_pipex pipex, char *cmd, char *infile, char **envp)
 	}
 	else
 	{
+		ft_putstr_fd("sono qui\n", STDERR_FILENO);
+		ft_putnbr_fd(errno, STDERR_FILENO);
 		if (errno == EFAULT)
 		{
 			ft_free(pipex.cmd_args, -1);
@@ -51,10 +54,16 @@ static void	first_child(t_pipex pipex, char *cmd, char *infile, char **envp)
 
 static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 {
+	//char buffer[1024];
 	pipex.cmd_args = str_split(cmd, ' ');
 	pipex.cmd = pipex.cmd_args[0];
 	pipex.cmd_path = find_cmd_path(pipex.cmd_args[0], envp);
 	pipex.cmd_args[0] = pipex.cmd_path;
+	/*
+	if (read(pipex.pipe[0], buffer, 1024))
+	exit (EXIT_FAILURE);
+	printf("%s\n", buffer);	
+	*/
 	dup2(pipex.pipe[0], STDIN_FILENO);
 	if (access(outfile, W_OK) == -1)
 	{
@@ -77,7 +86,8 @@ static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 	}
 	else
 	{
-		printf("sono qui");
+		ft_putstr_fd("sono qui\n", STDERR_FILENO);
+		ft_putnbr_fd(errno, STDERR_FILENO);
 		if (errno == EFAULT)
 		{
 			ft_free(pipex.cmd_args, -1);
@@ -129,16 +139,19 @@ int	main(int argc, char **argv, char **envp)
 		waitpid(pid1, &status1, 0);
 		if (WIFEXITED(status1))
 		{
-			printf("child1 exited with status %d\n", WEXITSTATUS(status1));
+			printf("child1 normally exited with status %d\n", WEXITSTATUS(status1));
 			//exit(WEXITSTATUS(status1));
 		}
+		else
+		{
+			printf("child1 brutally exited with status\n");
+		}
 		waitpid(pid2, &status2, 0);
-		if (!WIFEXITED(status2))
+		if (WIFEXITED(status2))
 		{
 			printf("child2 exited with status %d\n", WEXITSTATUS(status2));
 			exit(WEXITSTATUS(status2));
 		}
-		wait(NULL);
 	}
 	else
 	{
