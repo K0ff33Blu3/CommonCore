@@ -22,6 +22,4 @@ typedef struct s_pipex
 	int	pipe[2];
 } t_pipex;
 
-
-
 #endif
