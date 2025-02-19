@@ -1,0 +1,8 @@
+# escludo tutti gli infile e outfile di pipex
+out*
+in*
+pipex-tester/
+pipex_tester_42
+deepthought.txt
+/pipex/libft/
+
