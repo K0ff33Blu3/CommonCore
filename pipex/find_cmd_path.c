@@ -1,5 +1,4 @@
 #include "pipex.h"
-#include <errno.h>
 
 static char	*make_path(char *str, char *cmd)
 {

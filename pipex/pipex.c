@@ -55,7 +55,7 @@ static void	run_pipex(t_pipex pipex, char **argv, char **envp)
 		last_child(pipex, argv[3], argv[4], envp);
 	close_all(pipex);
 	waitpid(pid1, &status1, 0);
-	waitpid(pid2, &status2, 0);
+	waitpid(pid2, &status2, 0);void	ft_free(char **s, int i);
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))
 		exit(WEXITSTATUS(status2));
 }
@@ -64,6 +64,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
+	ft_memset(&pipex, 0, sizeof(t_pipex));
 	if (argc == 5)
 		run_pipex(pipex, argv, envp);
 	else
