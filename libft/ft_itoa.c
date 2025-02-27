@@ -56,24 +56,18 @@ char	*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	mgn = magnitude(n);
-	if (n >= 0)
-		nbr = (char *)malloc(sizeof(char) * (mgn + 2));
-	else
-		nbr = (char *)malloc(sizeof(char) * (mgn + 3));
+	nbr = (char *)malloc(sizeof(char) * (mgn + 2 + (n < 0)));
 	if (!nbr)
 		return (NULL);
 	if (n < 0)
 	{
-		nbr[i] = '-';
+		nbr[i++] = '-';
 		n *= -1;
-		i++;
 	}
 	while (mgn >= 0)
 	{
-		nbr[i] = (n / pow_ten(mgn)) + 48;
-		n %= pow_ten(mgn);
-		mgn--;
-		i++;
+		nbr[i++] = (n / pow_ten(mgn)) + 48;
+		n %= pow_ten(mgn--);
 	}
 	nbr[i] = 0;
 	return (nbr);

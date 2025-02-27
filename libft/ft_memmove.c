@@ -37,7 +37,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 /*
-
 int main() {
    char buffer[4] = "ciao";
    char dest[10];

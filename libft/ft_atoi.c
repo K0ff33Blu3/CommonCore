@@ -16,7 +16,7 @@
 
 static int	ft_isspace(int c)
 {
-	if ((c >= 7 && c <= 13) || c == 32)
+	if ((c >= '\t' && c <= '\r') || c == ' ')
 		return (1);
 	else
 		return (0);
@@ -49,7 +49,7 @@ int	ft_atoi(const char *nptr)
 /*
 int	main(void)
 {	
-	char *n = "\t\v\f\r\n \f-06050";
+	char *n = "\010 8";
  	int i1 = atoi(n);
  	int i2 = ft_atoi(n);
  	printf("atoi: %d\nft_atoi: %d\n", i1, i2);

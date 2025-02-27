@@ -16,7 +16,7 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned char		*str;
-	size_t					i;
+	size_t				i;
 
 	i = 0;
 	str = (unsigned char *)s;
@@ -32,8 +32,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 int main() {
    char *src = "/|\x12\xff\x09\x42\2002\42|\\";
  	int size = 10;
- 	
- 	printf("memchr: %s\nft_memchr: %s\n", (char *)memchr(src, '\200', size), (char *)ft_memchr(src, '\200', size));
  
  	if (memchr(src, '\200', size) == ft_memchr(src, '\200', size))
  	{

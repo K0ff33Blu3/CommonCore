@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libft_bonus.h"
 
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*new_node;
 
-	new_node = (t_list *)malloc (sizeof(t_list *));
+	new_node = (t_list *)malloc (sizeof(t_list));
 	if (!new_node)
 		return (NULL);
 	new_node->content = content;
@@ -25,6 +24,27 @@ t_list	*ft_lstnew(void *content)
 	return (new_node);
 }
 /*
+int main()
+{
+	t_list	*elem;
+	char    str [] = "lorem ipsum dolor sit";
+    	if (!(elem = ft_lstnew(str)))
+            printf("NULL");
+    	else
+    	{
+        	if (!(elem->content))
+        		printf("NULL");
+        	else
+            		printf("%s\n", (char *)elem->content);
+        	if (!(elem->next))
+        	{
+           		write(1, "\n", 1);
+            		printf("NULL");
+        	}
+        }
+	return 0;
+}
+
 int	main(void)
 {
 	char *content = "Milva";

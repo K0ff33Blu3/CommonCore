@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 13:37:34 by miricci           #+#    #+#             */
+/*   Updated: 2024/12/02 13:37:38 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include "libft_bonus.h"
 
 /*void del_content(void *content)
 {
@@ -7,22 +18,19 @@
 }
 */
 
-void    ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    t_list  *tmp;
+	t_list	*tmp;
 
-    if (!lst || !del || !*lst)
-        return ;
-
-    while(*lst)
-    {
-        //printf("1content: %s\n", (char *)(tmp)->content);
-        tmp = (*lst)->next;
-        del((*lst)->content);
-        //printf("2content: %s\n", (char *)(tmp)->content);
-        free(*lst);
-        *lst = tmp;
-    }
+	if (!lst || !del || !*lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		del((*lst)->content);
+		free(*lst);
+		*lst = tmp;
+	}
 }
 /*
 int main(void)

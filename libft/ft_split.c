@@ -12,9 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *s);
+#include "libft.h"
 
 static int	countwords(const char *s, char c)
 {

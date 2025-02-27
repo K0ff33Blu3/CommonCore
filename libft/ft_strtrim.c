@@ -14,15 +14,13 @@
 #include <stdio.h>
 #include "libft.h"
 
-
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char		*dst;
 	int			start;
 	int			end;
 	int			len;
-	
+
 	start = 0;
 	end = ft_strlen(s1);
 	if (!s1 || !set)

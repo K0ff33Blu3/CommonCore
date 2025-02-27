@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 11:27:10 by miricci           #+#    #+#             */
-/*   Updated: 2024/11/30 11:27:27 by miricci          ###   ########.fr       */
+/*   Created: 2024/11/30 11:13:27 by miricci           #+#    #+#             */
+/*   Updated: 2024/11/30 11:13:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libft_bonus.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	i;
-	
-	i = 0;
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }
 /*
 int	main(void)
@@ -40,6 +34,10 @@ int	main(void)
 	ft_lstadd_front(&list, node2);
 	ft_lstadd_front(&list, node1);
 	
-	printf("list size: %d\n", ft_lstsize(list));
+	while(list)
+	{
+		printf("content: %s\nnext: %p\n", (char *)list->content, list->next);
+		list = list->next;
+	}
 	return 0;
 }*/

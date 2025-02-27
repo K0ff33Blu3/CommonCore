@@ -1,53 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 10:43:15 by miricci           #+#    #+#             */
+/*   Updated: 2025/02/27 10:43:22 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_free(char **s, int i)
 {
-	if (i < 0)
+	int	j;
+
+	if (i == -1)
 	{
-		i = 0;
-		ft_putstr_fd("array intero", 1);
-		ft_putchar_fd('\n', 1);
-		ft_putchar_fd(s[i][0], 1);
-		//ft_putstr_fd(*s, 1);
-		//printf("%s\n", s[i]);
-		while (s[i][0] != 0)
+		j = 0;
+		while (s[j])
+			free(s[j++]);
+	}
+	else
+	{
+		while (--i >= 0)
 		{
-			i++;
+			printf("%d\n", i);
+			free(s[i]);
 		}
 	}
-	ft_putnbr_fd(i, 1);
-	ft_putchar_fd('\n', 1);
-	while (i-- >= 0)
-		free(s[i]);
 	free(s);
 }
-
-int main()
+/*
+int main(void)
 {
-	char	**str;
-	int	n_str;
-	int	i;
-
-	n_str = 1;
-	str = (char **)malloc(sizeof(char *) * (n_str + 1));
-	if (!str)
-		return 1;	
-	ft_putstr_fd("qualcosa\n", 1);
-	str[n_str] = NULL;
-	while (i < n_str)
-	{
-		str[i] = (char *)malloc(5);
-		if (!str[i])
-		{
-			perror("errore di allocazione");
-			ft_free(str, i);
-			return 1;
-		}
-		str[i] = "ciao";
-		i++;
-	}
-	ft_putstr_fd("qualcosa\n", 1);
-	ft_free(str, -1);
-	ft_putstr_fd("qualcosa\n", 1);
-	return 0;
+    int n_str = 5;
+    int i = 0;
+    char **array = (char **) malloc (sizeof(char *) * (n_str + 1));
+    if (!array)
+    return 1;
+    while (i < n_str)
+    {
+        array[i] = (char *) malloc (sizeof(char) * 5);
+        if(!array[i])
+        return (ft_free(array, i), 1);
+        array[i] = ft_memcpy(array[i], "ciao\0", 5);
+        i++;
+    }
+    array[n_str] = 0;
+    printf("array creato\n");
+    ft_free(array, 3);
+    return 0;
 }
+*/

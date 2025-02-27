@@ -1,5 +1,17 @@
-#include "libft_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 13:48:37 by miricci           #+#    #+#             */
+/*   Updated: 2024/12/02 13:48:38 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "libft.h"
+/*
 void    del_content(void *content)
 {
     free(content);
@@ -27,39 +39,29 @@ void    to_lowercase(void *content)
         str++;
     }
 }
-
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+*/
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-    t_list  *new_list;
-    t_list  *new_node;
-    t_list  *new_content;
-    t_list  *tmp;
+	t_list	*new_list;
+	t_list	*new_node;
 
-    new_list = NULL;
-    if (!lst | !f | !del)
-        return (NULL);
-    while (lst)
-    {
-        new_content = f(lst->content);
-        if (!new_content)        
-            return NULL;
-        new_node = ft_lstnew(new_content);
-        if (!new_node)
-            return NULL;
-        if (!new_list)
-            new_list = new_node;
-        else
-        {
-            tmp = new_list;
-            while (tmp->next)
-                tmp = tmp->next;
-            tmp->next = new_node;
-        }
-        lst = lst->next;
-    }
-    return (new_list);
+	new_list = NULL;
+	if (!lst | !f | !del)
+		return (NULL);
+	while (lst)
+	{
+		new_node = ft_lstnew(f(lst->content));
+		if (!new_node)
+		{
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_node);
+		lst = lst->next;
+	}
+	return (new_list);
 }
-
+/*
 int main(void)
 {
     t_list *node1 = (t_list *)malloc(sizeof(t_list));
@@ -103,3 +105,4 @@ int main(void)
     }
     return (0);
 }
+*/

@@ -13,21 +13,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(char *s);
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*dst;
 	int		i;
 	int		j;
-	size_t		max_len;
+	size_t	max_len;
 
 	i = 0;
 	j = 0;
 	if (start >= ft_strlen(s))
-		return(ft_strdup(""));
+		return (ft_strdup(""));
 	max_len = ft_strlen(s) - start;
 	if (max_len > len)
 		max_len = len;

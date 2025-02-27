@@ -24,7 +24,7 @@ char	*ft_strdup(char *src)
 	if (dst == 0)
 		return (0);
 	ft_memcpy(dst, src, len);
-	*(dst + len)  = 0;
+	*(dst + len) = 0;
 	return (dst);
 }
 /*

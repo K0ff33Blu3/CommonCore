@@ -22,16 +22,14 @@ char	*ft_strchr(const char *s, int c)
 		else
 			s++;
 	}
-	if (!c)
+	if (!(char)c)
 		return ((char *)s);
 	return (NULL);
 }
 /*
 int	main(void)
-{
-	char	*str = "Milva";
-	char	c = 'l';
-	
-	printf("%s\n", ft_strchr(str, c));
+{	
+	printf("%s\n", ft_strchr("teste", '\0'));
 	return 0;
-}*/
+}
+*/
