@@ -3,7 +3,9 @@
 int	main(int ac, char **av)
 {
 	t_list	*arg;
-	arg = *create_list((ac - 2), av++);
-	print_list(arg);
+	
+	av++;
+	arg = create_list(av, ac);
+	print_list(&arg);
 	return (0);
 }
