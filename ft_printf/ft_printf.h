@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdlib.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 int	ft_putptr(void *ptr);
 int	ft_putchar(char c);

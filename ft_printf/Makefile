@@ -1,4 +1,4 @@
-NAME = libftprintf.a
+NAME = ft_printf.a
 
 CC = cc
 
@@ -11,8 +11,8 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME) : $(OBJS)
-	make -C libft
-	cp libft/libft.a $(NAME)
+	make -C ../libft
+	cp ../libft/libft.a $(NAME)
 	ar rc $@ $?
 
 %.o: %c

@@ -27,9 +27,9 @@ void   print_list(t_list **head)
     int i = 1;
     while (node)
     {
-        printf("%d: ", i);
-        printf("%s\n", (char *)(node->content));
-        printf("%s\n", (char *)(node->next));
+        ft_printf("%d: ", i);
+        ft_printf("%s\n", (char *)(node->content));
+        ft_printf("%s\n", (char *)(node->next));
         node = node->next;
         i++;
     }
