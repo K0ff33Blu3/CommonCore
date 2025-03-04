@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 16:28:10 by miricci           #+#    #+#             */
-/*   Updated: 2024/11/29 16:29:01 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:18:33 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,6 @@ static int	countwords(const char *s, char c)
 		s++;
 	}
 	return (r);
-}
-
-static void	ft_free(char **s, int i)
-{
-	while (i-- > 0)
-		free(s[i]);
-	free(s);
 }
 
 static int	word_len(const char *s, unsigned int start, char end)
@@ -69,7 +62,7 @@ static char	**fill_split(char **dest, const char *s, char c, int words)
 			j++;
 		dest[i] = (char *)malloc(sizeof(char) * (word_len(s, j, c) + 1));
 		if (!dest[i])
-			return (ft_free(dest, i), NULL);
+			return (ft_free((void **)dest, i), NULL);
 		k = 0;
 		while (s[j] && s[j] != c)
 			dest[i][k++] = s[j++];

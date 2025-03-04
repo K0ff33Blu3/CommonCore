@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 15:28:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/04 15:28:24 by miricci          ###   ########.fr       */
+/*   Created: 2025/03/04 15:28:39 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/04 15:28:41 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+t_list	**create_list(int list_size, char **nptr)
 {
-	t_list	**arg;
-	int		**tab;
+	t_list	**list;
+	t_list	*node;
+	int		i;
+	int		*arg;
 
-	av++;
-	tab = parse_integer(av, ac - 1);
-	arg = create_list((void **)tab, ac - 1);
-	print_list(arg);
-	ft_lstclear(arg, free);
-	free(tab);
-	return (0);
+	i = 0;
+	list = NULL;
+	arg = malloc(sizeof(int));
+	if (!arg)
+		return (0);
+	while (i < list_size)
+	{
+		*arg = ft_atoi(nptr[i]);
+		node = ft_lstnew(arg);
+		if (!node)
+		{
+			ft_lstiter(*list, free);
+			return (NULL);
+		}
+		ft_lstadd_back(list, node);
+		i++;
+	}
+	return (list);
 }

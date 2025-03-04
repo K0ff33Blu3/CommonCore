@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   print_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 15:28:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/04 15:28:24 by miricci          ###   ########.fr       */
+/*   Created: 2025/03/04 15:28:50 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/04 15:28:52 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	print_list(t_list **head)
 {
-	t_list	**arg;
-	int		**tab;
+	t_list	*node;
+	int		*value;
+	int		i;
 
-	av++;
-	tab = parse_integer(av, ac - 1);
-	arg = create_list((void **)tab, ac - 1);
-	print_list(arg);
-	ft_lstclear(arg, free);
-	free(tab);
-	return (0);
+	i = 1;
+	node = *head;
+	ft_printf("\n------------PRINT LIST---------------\n");
+	while (node)
+	{
+		value = node->content;
+		ft_printf("node %d: \n", i);
+		ft_printf("content: %d\n", *value);
+		ft_printf("next: %p\n", node->next);
+		node = node->next;
+		i++;
+	}
+	ft_printf("------------PRINT LIST---------------\n\n");
 }

@@ -1,8 +1,12 @@
+# escludo tutti i file oggetto e gli eseguibili
+*.o
+*a.out
+
 # escludo tutti gli infile e outfile di pipex
 out*
 in*
+# escludo tutti i tester di pipex
 pipex-tester/
 pipex_tester_42
 deepthought.txt
-/pipex/libft/
 
