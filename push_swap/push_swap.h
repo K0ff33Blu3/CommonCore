@@ -7,13 +7,9 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 
-typedef struct s_nlist
-{
-	int	nbr;
-	struct s_nlist *next;
-}	t_nlist;
-
-t_list *create_list(char **args, int list_size);
+t_list	**create_list(void **args, int list_size);
 void   print_list(t_list **head);
+int	**parse_integer(char **nbrs, int tab_size);
+
 
 #endif
