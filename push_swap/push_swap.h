@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:05 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/04 15:28:09 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:45:34 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 t_list	**create_list(void **args, int list_size);
 void	print_list(t_list **head);
+void	swap(t_list **head);
+void	rotate(t_list **head);
+void	rrotate(t_list **head);
 int		**parse_integer(char **nbrs, int tab_size);
 
 #endif
