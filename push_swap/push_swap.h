@@ -6,13 +6,12 @@
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:05 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/04 18:45:34 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/05 14:50:32 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-#  define STR(X) #X
 
 # include <stdio.h>
 # include <unistd.h>
