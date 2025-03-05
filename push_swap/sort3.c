@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   sort3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 14:53:16 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/05 18:52:50 by miricci          ###   ########.fr       */
+/*   Created: 2025/03/05 18:52:52 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/05 19:03:05 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_list **stack_a, t_list **stack_b)
+void	sort3(t_list **stack)
 {
-	t_list	*node_a;
-	t_list	*node_b;
+	t_list	*node;
+	t_list *nxt_node;
 
-	ft_printf("------------EXEC PUSH---------------\n");
-	if (!stack_a || !stack_b)
-		return ;
-	node_a = *stack_a;
-	node_b = *stack_b;
-	*stack_b = node_a;
-	*stack_a = node_a->next;
-	node_a->next = node_b;
+	node = *stack;
+	nxt_node = node->next;
+	if (node->content > nxt_node->content && nxt_node->content < nxt_node->next->content)
+	
+		
 }
+
