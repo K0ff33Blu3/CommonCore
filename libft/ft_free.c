@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:43:15 by miricci           #+#    #+#             */
-/*   Updated: 2025/02/27 10:43:22 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:15:06 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free(char **s, int i)
+void	ft_free(void **s, int i)
 {
 	int	j;
 
@@ -25,10 +25,7 @@ void	ft_free(char **s, int i)
 	else
 	{
 		while (--i >= 0)
-		{
-			printf("%d\n", i);
 			free(s[i]);
-		}
 	}
 	free(s);
 }
