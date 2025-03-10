@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/10 15:29:28 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/10 15:39:40 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	t_list	**arg;
+	t_list	**stack_a;
+	t_list	**stack_b;
 	int		**tab;
 
 	if (ac == 1)
