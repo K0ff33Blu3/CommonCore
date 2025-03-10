@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:55:16 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/04 14:19:08 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:14:38 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
+# include "ft_printf/ft_printf.h"
 
 typedef struct s_list
 {

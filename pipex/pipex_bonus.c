@@ -48,7 +48,7 @@ void	ft_fork(t_pipex pipex, char *cmd, char **envp)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		parse_cmd(&pipex, cmd, envp);
-		exec_command(pipex, envp);		
+		exec_command(pipex, envp);
 	}
 	else
 		dup2(fd[0], STDIN_FILENO);

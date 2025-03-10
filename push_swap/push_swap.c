@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/10 15:39:40 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/10 17:12:33 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_list	**stack_a;
-	t_list	**stack_b;
+	//list	**stack_b;
 	int		**tab;
 
 	if (ac == 1)
@@ -27,10 +27,10 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	arg = create_list((void **)tab, ac - 1);
-	print_list(arg);
+	stack_a = create_list((void **)tab, ac - 1);
+	print_list(stack_a);
 	//check_small_stacks(arg)
-	ft_lstclear(arg, free);
+	ft_lstclear(stack_a, free);
 	free(tab);
 	return (0);
 }

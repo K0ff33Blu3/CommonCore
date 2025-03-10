@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort3.c                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 18:52:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/05 19:03:05 by miricci          ###   ########.fr       */
+/*   Created: 2024/12/03 12:36:48 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/10 16:17:32 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	sort3(t_list **stack)
-{
-	t_list	*node;
-	t_list *nxt_node;
+# include <unistd.h>
+# include <stdint.h>
+# include <stdarg.h>
+# include <stddef.h>
+# include <stdlib.h>
 
-	node = *stack;
-	nxt_node = node->next;
-	if (node->content > nxt_node->content && nxt_node->content < nxt_node->next->content)
-	
-		
-}
+int	ft_putptr(void *ptr);
+int	ft_putchar(char c);
+int	ft_putnbr(int nbr);
+int	ft_putstr(const char *s);
+int	ft_putnbr_hex(unsigned long nbr, char c);
+int	ft_putnbr_unsigned(unsigned int nbr);
+int	ft_printf(const char *format, ...);
 
+#endif

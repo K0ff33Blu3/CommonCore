@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:05 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/10 15:40:24 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/10 18:28:59 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 # include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
 
 t_list	**create_list(void **args, int list_size);
 void	print_list(t_list **head);

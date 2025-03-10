@@ -1,8 +1,19 @@
 #include "push_swap.h"
 
-void	sort_three(t_list *node)
+int		max_of_three(int a, int b, int c)
 {
 	int	max;
 
-	
+	max = a;
+	if (a < b)
+	{
+		max = b;
+		if (b < c)
+			max = c;
+	}
+	else if (a < c)
+		max = c;
+	return (max);
 }
+
+

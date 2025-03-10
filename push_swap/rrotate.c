@@ -3,13 +3,14 @@
 static void	rrotate(t_list **head)
 {
 	t_list	*tmp;
-	t_list	*first;
 	t_list	*last;
-	
-	tmp = 
+
+	tmp = *head;
+	while ((tmp->next)->next)
+		tmp = tmp->next;
 	last = ft_lstlast(*head);
 	last->next = *head;
-	first->next = tmp;
+	tmp->next = NULL;
 	*head = last;
 }
 
