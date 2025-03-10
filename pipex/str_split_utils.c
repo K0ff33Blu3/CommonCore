@@ -58,13 +58,13 @@ char	**fill_split(char **dest, const char *s, char c, int words)
 		{
 			dest[i] = make_quote(s, &j);
 			if (!dest[i])
-				return (ft_free(dest, i), NULL);
+				return (ft_free((void **)dest, i), NULL);
 		}
 		else
 		{
 			dest[i] = make_word(s, c, &j);
 			if (!dest[i])
-				return (ft_free(dest, i), NULL);
+				return (ft_free((void **)dest, i), NULL);
 		}
 		i++;
 	}

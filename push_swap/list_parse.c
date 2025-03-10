@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:14 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/04 15:28:16 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/10 13:30:43 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	**parse_integer(char **nbrs, int tab_size)
 		*tab[i] = ft_atoi(nbrs[i]);
 		i++;
 	}
+	tab[tab_size] = NULL;
 	return (tab);
 }
 

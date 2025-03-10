@@ -12,7 +12,7 @@ void	cmd_not_found(t_pipex pipex)
 {
 	ft_putstr_fd(pipex.cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	ft_free(pipex.cmd_args, -1);
+	ft_free((void **)pipex.cmd_args, -1);
 	free(pipex.cmd_path);
 	free(pipex.cmd);
 	exit(127);
@@ -41,7 +41,7 @@ void	exec_command(t_pipex pipex, char **envp)
 	{
 		if (execve(pipex.cmd_path, pipex.cmd_args, envp) < 0)
 		{
-			ft_free(pipex.cmd_args, -1);
+			ft_free((void **)pipex.cmd_args, -1);
 			free(pipex.cmd);
 			free(pipex.cmd_path);
 			ft_error("execve");
