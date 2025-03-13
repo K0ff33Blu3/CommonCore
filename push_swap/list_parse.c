@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:14 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/10 15:36:17 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:39:04 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	**parse_integer(char **nbrs, int tab_size)
 	int	i;
 
 	i = 0;
-	tab = malloc(sizeof(int *) * tab_size);
+	tab = malloc(sizeof(int *) * (tab_size + 1));
 	if (!tab)
 		return (NULL);
 	while (i < tab_size)
@@ -42,31 +42,37 @@ t_list	**create_list(void **args, int list_size)
 	head = (t_list **)malloc(sizeof(t_list *));
 	if (!head)
 		return (NULL);
+	if (!list_size)
+	{
+		*head = NULL;
+		return (head);
+	}
 	*head = ft_lstnew(args[0]);
 	if (!*head)
 		return (free(head), NULL);
 	node = *head;
-	i = 1;
-	while (i < list_size)
+	i = 0;
+	while (++i < list_size)
 	{
 		node->next = ft_lstnew(args[i]);
 		if (!node->next)
 			return (ft_lstclear(head, free), free(head), NULL);
 		node = node->next;
-		i++;
 	}
 	return (head);
 }
 
-void	print_list(t_list **head)
+void	print_list(t_list **head, char *list_name)
 {
 	t_list	*node;
 	int		*value;
 	int		i;
 
+	if (!head)
+		return ;
 	i = 1;
 	node = *head;
-	ft_printf("\n------------PRINT LIST---------------\n");
+	ft_printf("\n------------%s---------------\n", list_name);
 	while (node)
 	{
 		value = node->content;
@@ -76,5 +82,5 @@ void	print_list(t_list **head)
 		node = node->next;
 		i++;
 	}
-	ft_printf("------------PRINT LIST---------------\n\n");
+	ft_printf("------------%s---------------\n\n", list_name);
 }

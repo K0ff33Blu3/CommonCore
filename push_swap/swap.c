@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:52:51 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/10 15:42:13 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/12 17:29:56 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	swap(t_list **head)
 void	sa(t_list **stack_a)
 {
 	swap(stack_a);
-	ft_printf("ra\n");
+	ft_printf("sa\n");
 }
 
 void	sb(t_list **stack_b)

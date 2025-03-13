@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/12 14:22:10 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/12 14:22:41 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_numbers(char **nptr)
@@ -18,7 +30,7 @@ int	check_numbers(char **nptr)
 		{
 			if (!ft_isdigit(nptr[i][j]))
 				return (0);
-			j++;		
+			j++;
 		}
 		i++;
 	}
@@ -54,7 +66,7 @@ int	check_double(int **nbr)
 				return (0);
 			j++;
 		}
-		i++;		
+		i++;
 	}
-	return (1);	
+	return (1);
 }

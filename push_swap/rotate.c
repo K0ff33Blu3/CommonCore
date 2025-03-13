@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:53:03 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/10 15:38:53 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/12 13:00:18 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	rotate(t_list **head)
 	t_list	*last;
 	t_list	*tmp;
 
-	ft_printf("\n------------EXEC ROT---------------\n");
 	tmp = (*head)->next;
 	last = ft_lstlast(*head);
 	last->next = *head;
