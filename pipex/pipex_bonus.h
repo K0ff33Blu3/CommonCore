@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:38:39 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 14:39:26 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/22 16:11:22 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_pipex
 	int		in_fd;
 	int		out_fd;
 	int		pipe[2];
+	char	*limiter;
 	char	*cmd;
 	char	*cmd_path;
 	char	**cmd_args;

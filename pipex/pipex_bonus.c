@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:35:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 15:55:19 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/22 18:15:46 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,33 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 		exit(WEXITSTATUS(status2));
 }
 
+void	here_doc(t_pipex pipex, char **argv)
+{
+	char	*line;
+
+	pipex.limiter = ft_strjoin(argv[2], "\n");
+	line = get_next_line(STDIN_FILENO);
+	while (line)
+	{
+		if (!ft_strncmp(line, pipex.limiter, ft_strlen(pipex.limiter)))
+			break ;
+		ft_putstr_fd(line, pipex.pipe[1]);
+		line = get_next_line(STDIN_FILENO);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pipex;
 
 	ft_memset(&pipex, 0, sizeof(t_pipex));
 	if (argc >= 5)
-		run_pipex(pipex, argc, argv, envp);
+	{
+		if (!ft_strncmp(argv[1], "here_doc", 8))
+			here_doc(pipex, argv);
+		else
+			run_pipex(pipex, argc, argv, envp);
+	}
 	else
 	{
 		ft_putstr_fd("Wrong argument number\n", STDERR_FILENO);
