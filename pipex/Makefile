@@ -17,21 +17,26 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	make -C libft
 	$(CC) $(CFLAGS) $^ -o $@ -Llibft -lft
+	@echo -e "\033[32m$(NAME) created successfully\033[0m"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -g -c $? -o $@
 
-bonus : $(OBJS_BONUS)
-	make -C libft
-	$(CC) $(CFLAGS) $^ -o $@ -Llibft -lft
 
 clean:
 	make -C libft clean
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_BONUS)
+	@echo -e "\033[32mObject files removed successfully\033[0m"
 
 fclean: clean
 	make -C libft fclean
 	rm -f $(NAME)
+	@echo -e "\033[32m$(NAME) removed successfully\033[0m"
+
+bonus : fclean
+	make -C libft
+	$(CC) $(CFLAGS) $(SRCS_BONUS) -o $(NAME) -Llibft -lft
+	@echo -e "\033[32m$(NAME) created successfully\033[0m"
 
 re: fclean all
 

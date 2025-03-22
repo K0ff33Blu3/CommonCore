@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_cmd_path.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/22 15:54:23 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/22 15:54:24 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 static char	*make_path(char *str, char *cmd)
@@ -36,6 +48,8 @@ char	*find_cmd_path(char *cmd, char **envp)
 		i++;
 	}
 	free(array);
+	if (!access(cmd, X_OK))
+		return (cmd);
 	return (NULL);
 }
 /*

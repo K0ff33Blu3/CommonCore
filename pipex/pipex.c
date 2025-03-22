@@ -1,15 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
+/*   Updated: 2025/03/22 14:44:12 by miricci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 static void	first_child(t_pipex pipex, char *cmd, char *infile, char **envp)
 {
-	parse_cmd(&pipex, cmd, envp);
 	if (access(infile, R_OK) == -1)
-	{
-		ft_free((void **)pipex.cmd_args, -1);
-		free(pipex.cmd);
-		free(pipex.cmd_path);
 		ft_error(infile);
-	}
+	parse_cmd(&pipex, cmd, envp);
 	dup2(pipex.in_fd, STDIN_FILENO);
 	dup2(pipex.pipe[1], STDOUT_FILENO);
 	close_all(pipex);
