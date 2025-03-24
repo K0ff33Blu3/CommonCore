@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:30:53 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/23 19:35:32 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:05:17 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_mlx_img
 	void	*img_ptr;
 	char	*addr;
 	int		bits_per_pixel;
-	int		line_length;
+	int		line_len;
 	int		endian;
 }	t_mlx_img;
 

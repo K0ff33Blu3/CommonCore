@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:31:26 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/23 19:53:55 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/24 12:18:52 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int	close_display(t_mlx_data *data)
 	exit(EXIT_SUCCESS);
 }
 
+void	putpixels(t_mlx_img *img, int x, int y, int color)
+{
+	int	offset;
+
+	offset = (img->line_len * y) + (x + (img->bits_per_pixel / 8));
+	*((unsigned int *)(offset + img->addr)) = color;
+}
+
 void	color_screen(t_mlx_data *data, int color)
 {
 	int	x;
@@ -45,11 +53,12 @@ void	color_screen(t_mlx_data *data, int color)
 		x = 0;
 		while (x < WID)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->mlx_window, x, y, color);
+			putpixels(data->img.img_ptr, x, y, color);
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->img.img_ptr, 0, 0);
 }
 
 int	on_keypress(int keysym, t_mlx_data *data)
@@ -63,7 +72,6 @@ int	on_keypress(int keysym, t_mlx_data *data)
 	else if (keysym == XK_b)
 	color_screen(data, 0xff); 
 	printf("Key %d has been pressed\n", keysym);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->img.img_ptr, 0, 0);
 	return (0);
 }
 
@@ -76,7 +84,7 @@ int	main(void)
 		return (1);
 	data.mlx_window = mlx_new_window(data.mlx_ptr, WID, LEN, "New Window");
 	data.img.img_ptr = mlx_new_image(data.mlx_ptr, WID, LEN);
-	data.img.addr = mlx_get_data_addr(data.img.img_ptr, &data.img.bits_per_pixel, &data.img.line_length, &data.img.endian);
+	data.img.addr = mlx_get_data_addr(data.img.img_ptr, &data.img.bits_per_pixel, &data.img.line_len, &data.img.endian);
 	// mlx_put_image_to_window(data.mlx_ptr, data.mlx_window, data.img.img_ptr, 0, 0);
 	mlx_hook(data.mlx_window, EnterNotify, EnterWindowMask, on_enter_window, &data);
 	mlx_hook(data.mlx_window, LeaveNotify, LeaveWindowMask, on_leave_window, &data);
