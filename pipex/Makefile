@@ -8,7 +8,7 @@ SRCS = pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
-SRCS_BONUS = pipex_bonus.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c
+SRCS_BONUS = pipex_bonus.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 

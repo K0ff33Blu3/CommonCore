@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 14:44:12 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/02 14:45:24 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 {
 	parse_cmd(&pipex, cmd, envp);
 	dup2(pipex.pipe[0], STDIN_FILENO);
+	close(pipex.pipe[1]);
 	if (access(outfile, W_OK) == -1)
 	{
 		ft_free((void **)pipex.cmd_args, -1);
