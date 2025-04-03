@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:05 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/13 10:13:19 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:03:26 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	pa(t_list **stack_a, t_list **stack_b);
 void	pb(t_list **stack_a, t_list **stack_b);
 void	check_small_stacks(t_list **stack_a, t_list **stack_b);
 void	sorted_check(t_list **stack);
-int	is_sorted_list(t_list *node);
 int		**parse_integer(char **nbrs, int tab_size);
 int		**normalize_tab(int **tab, int tab_size);
+int		array_size(void **tab);
 int		is_sorted_list(t_list *node);
 int		check_double(int **nbr);
 int		check_limits(int **nbr);

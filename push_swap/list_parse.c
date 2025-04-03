@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:14 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/12 13:39:04 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:26:59 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_list	**create_list(void **args, int list_size)
 	{
 		node->next = ft_lstnew(args[i]);
 		if (!node->next)
-			return (ft_lstclear(head, free), free(head), NULL);
+			return (ft_lstclear(head, free), NULL);
 		node = node->next;
 	}
 	return (head);

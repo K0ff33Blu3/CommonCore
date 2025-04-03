@@ -75,7 +75,6 @@ char	*get_next_buffer(char *current_buffer, char *new_line, unsigned long len)
 
 	new_buffer = ft_substr(current_buffer, len, ft_strlen(new_line));
 	printf("current_buffer: %s\n", current_buffer);
-	//printf("len: %d\n", len);
 	if (!*new_buffer)
 	{
 		free(new_buffer);

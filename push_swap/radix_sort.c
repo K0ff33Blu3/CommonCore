@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:19:09 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/13 10:15:07 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/25 12:10:49 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	**normalize_tab(int **tab, int tab_size)
 		while (j < tab_size)
 		{
 			if (*tab[j] < value)
-				*norm[i] = *norm[i] + 1;
+				(*norm[i])++;
 			j++;
 		}
 		i++;

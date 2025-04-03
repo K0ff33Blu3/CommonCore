@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:56:18 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/12 20:00:06 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:07:38 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int	is_sorted_list(t_list *node)
 	return (1);
 }
 
-void	sorted_check(t_list **stack)
+int	array_size(void **tab)
 {
-	if (is_sorted_list(*stack))
-	{
-		ft_printf("SORTED!");
-		exit(EXIT_SUCCESS);
-	}
+	int	size;
+
+	size = 0;
+	while (tab[size])
+		size++;
+	return (size);
 }
 
 static void	sort_three(t_list **stack)
@@ -65,7 +66,8 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 {
 	int	count;
 
-	sorted_check(stack_a);
+	if (is_sorted_list(*stack_a))
+		exit (EXIT_SUCCESS);
 	count = 0;
 	while (count < 2)
 	{
@@ -101,16 +103,9 @@ void	check_small_stacks(t_list **stack_a, t_list **stack_b)
 	{
 		if (!is_sorted_list(*stack_a))
 			sa(stack_a);
-		// sorted_check(stack_a);
 	}
 	if (size == 3)
-	{
 		sort_three(stack_a);
-		// sorted_check(stack_a);
-	}
 	if (size == 5 || size == 4)
-	{
 		sort_five(stack_a, stack_b);
-		// sorted_check(stack_a);
-	}
 }

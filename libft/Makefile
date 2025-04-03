@@ -14,11 +14,12 @@ SRCS = ft_atoi.c ft_itoa.c ft_putendl_fd.c ft_strjoin.c ft_strtrim.c ft_bzero.c 
 		ft_strnstr.c ft_isprint.c ft_putchar_fd.c ft_striteri.c ft_strrchr.c ft_free.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 		ft_lstiter.c ft_lstmap.c \
+		gnl.c \
 
 # File oggetto
 OBJS = $(SRCS:.c=.o)
 
-FT_PRINTF = ft_printf/ft_printf.a
+FT_PRINTF = ft_printf/libftprintf.a
 
 # regola di default -> dipende da $(NAME)
 all: $(NAME)
