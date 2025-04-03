@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 11:56:18 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/31 15:07:38 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:54:14 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ int	is_sorted_list(t_list *node)
 		node = node->next;
 	}
 	return (1);
-}
-
-int	array_size(void **tab)
-{
-	int	size;
-
-	size = 0;
-	while (tab[size])
-		size++;
-	return (size);
 }
 
 static void	sort_three(t_list **stack)
@@ -81,13 +71,11 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 	}
 	if (is_sorted_list(*stack_b))
 		sb(stack_b);
-	if (ft_lstsize(*stack_a) == 2)
-	{
+	if (ft_lstsize(*stack_a) == 3)
+		sort_three(stack_a);
+	else
 		if (!is_sorted_list(*stack_a))
 			sa(stack_a);
-	}
-	else
-		sort_three(stack_a);
 	pa(stack_a, stack_b);
 	pa(stack_a, stack_b);
 }

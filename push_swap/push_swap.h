@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:05 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/31 15:03:26 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/03 15:55:49 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_data
 }	t_data;
 
 t_list	**create_list(void **args, int list_size);
-void	print_list(t_list **head, char *list_name);
 void	sa(t_list **stack_a);
 void	sb(t_list **stack_b);
 void	ss(t_list **stack_a, t_list **stack_b);
@@ -40,10 +39,8 @@ void	rrr(t_list **stack_a, t_list **stack_b);
 void	pa(t_list **stack_a, t_list **stack_b);
 void	pb(t_list **stack_a, t_list **stack_b);
 void	check_small_stacks(t_list **stack_a, t_list **stack_b);
-void	sorted_check(t_list **stack);
 int		**parse_integer(char **nbrs, int tab_size);
 int		**normalize_tab(int **tab, int tab_size);
-int		array_size(void **tab);
 int		is_sorted_list(t_list *node);
 int		check_double(int **nbr);
 int		check_limits(int **nbr);

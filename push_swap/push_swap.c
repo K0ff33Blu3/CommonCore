@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/31 15:12:14 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/03 16:16:13 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ int	main(int ac, char **av)
 		arg = av;
 	n_arg = array_size((void **)arg);
 	tab = parse_integer(arg, n_arg);
-	if (!check_numbers(arg) || !check_double(tab) || !check_limits(tab))
-	{
+	if (!check_numbers(arg) || !check_double(tab) || !check_limits(tab)){
 		ft_free((void **)arg, -1);
 		ft_free((void **)tab, -1);
-		ft_putstr_fd("Error not digit\n", STDERR_FILENO);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	ind = normalize_tab(tab, n_arg);
@@ -47,7 +46,7 @@ int	main(int ac, char **av)
 	else
 		radix_sort(stack_a, stack_b);
 	ft_lstclear(stack_a, free);
-	ft_lstclear(stack_b, free);
+	free(stack_b);
 	free(ind);
 	return (0);
 }
