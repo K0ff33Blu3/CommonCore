@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/07 17:00:25 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/07 17:11:25 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 	if (access(outfile, W_OK) == -1)
 	{
 		ft_free((void **)pipex.cmd_args, -1);
+		ft_free((void **)pipex.all_cmds, -1);
 		free(pipex.cmd);
 		free(pipex.cmd_path);
 		ft_error(outfile);
