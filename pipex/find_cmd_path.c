@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:54:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 15:54:24 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:52:51 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*find_cmd_path(char *cmd, char **envp)
 	char	*path;
 	int		i;
 
+	if (!access(cmd, X_OK))
+		return (cmd);
 	i = 0;
 	while (!ft_strnstr(envp[i], "PATH", 4))
 		i++;
@@ -48,8 +50,6 @@ char	*find_cmd_path(char *cmd, char **envp)
 		i++;
 	}
 	free(array);
-	if (!access(cmd, X_OK))
-		return (cmd);
 	return (NULL);
 }
 /*

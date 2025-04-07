@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   docs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:47:03 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/02 14:47:12 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:19:32 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 void	input_doc(t_pipex *pipex, char **argv, int argc)
 {
@@ -28,10 +28,14 @@ void	input_doc(t_pipex *pipex, char **argv, int argc)
 	pipex->all_cmds[i] = NULL;
 	pipex->n_cmd = i;
 	pipex->in_fd = open(argv[1], O_RDONLY);
+	pipex->out_fd = open(argv[argc -1], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (access(argv[1], R_OK) == -1)
+	{
+		ft_free((void **)pipex->all_cmds, -1);
 		ft_error(argv[1]);
+	}
 	dup2(pipex->in_fd, STDIN_FILENO);
-	close(pipex->in_fd);	
+	close(pipex->in_fd);
 }
 
 void	here_doc(t_pipex *pipex, char **argv, int argc)
@@ -47,6 +51,7 @@ void	here_doc(t_pipex *pipex, char **argv, int argc)
 		pipex->all_cmds[i] = ft_strdup(argv[3 + i]);
 	pipex->all_cmds[i] = NULL;
 	pipex->n_cmd = i;
+	pipex->out_fd = open(argv[argc -1], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (pipe(pipex->pipe) == -1)
 		ft_error("pipe");
 	while (1)
@@ -57,8 +62,7 @@ void	here_doc(t_pipex *pipex, char **argv, int argc)
 		ft_putstr_fd(line, pipex->pipe[1]);
 		free(line);
 	}
-	close(pipex->pipe[1]);
-	dup2(pipex->pipe[0], STDIN_FILENO);
-	close(pipex->pipe[0]);
 	free(line);
+	dup2(pipex->pipe[0], STDIN_FILENO);
+	close_pipe(*pipex);
 }

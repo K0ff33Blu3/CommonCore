@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 16:40:41 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 16:46:47 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:30:08 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*get_next_line(int fd)
 	static char		*buffer[1024];
 	char			*line;
 	char			*new_line;
-	int	len;
+	int				len;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

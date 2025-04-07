@@ -1,4 +1,0 @@
-
-	if (pipe(pipex.pipe) == -1)
-		ft_error("pipe");
-	line = get_next_line(STDIN_FILENO);

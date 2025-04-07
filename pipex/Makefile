@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c
+SRCS = pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,7 +33,7 @@ fclean: clean
 	rm -f $(NAME)
 	@echo -e "\033[32m$(NAME) removed successfully\033[0m"
 
-bonus : fclean
+bonus :
 	make -C libft
 	$(CC) $(CFLAGS) $(SRCS_BONUS) -o $(NAME) -Llibft -lft
 	@echo -e "\033[32m$(NAME) created successfully\033[0m"

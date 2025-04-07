@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:39:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 15:39:03 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:55:52 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	cmd_not_found(t_pipex pipex)
 	ft_putstr_fd(pipex.cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	ft_free((void **)pipex.cmd_args, -1);
+	ft_free((void **)pipex.all_cmds, -1);
 	free(pipex.cmd_path);
 	free(pipex.cmd);
 	exit(127);
@@ -38,12 +39,16 @@ void	ft_error(char *str)
 
 void	parse_cmd(t_pipex *pipex, char *cmd, char **envp)
 {
+	if (!(*cmd))
+	{
+		ft_free((void **)pipex->all_cmds, -1);
+		exit(EXIT_FAILURE);
+	}
 	pipex->cmd_args = str_split(cmd, ' ');
 	pipex->cmd = ft_strdup(pipex->cmd_args[0]);
 	pipex->cmd_path = find_cmd_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_path)
 		cmd_not_found(*pipex);
-	free(pipex->cmd_args[0]);
 	pipex->cmd_args[0] = ft_strdup(pipex->cmd_path);
 }
 
