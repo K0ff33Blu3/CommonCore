@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:54:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/07 16:52:51 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/09 18:34:38 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*find_cmd_path(char *cmd, char **envp)
 	if (!access(cmd, X_OK))
 		return (cmd);
 	i = 0;
-	while (!ft_strnstr(envp[i], "PATH", 4))
+	while (envp[i] && !ft_strnstr(envp[i], "PATH", 4))
 		i++;
 	array = ft_split(envp[i] + 5, ':');
 	i = 0;
