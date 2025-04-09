@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:22:10 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/31 14:33:13 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/09 15:31:38 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	check_error(char **arg, int **tab)
+{
+	if (!check_numbers(arg) || !check_double(tab) || !check_limits(tab))
+	{
+		ft_free((void **)arg, -1);
+		ft_free((void **)tab, -1);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+}
 
 int	check_numbers(char **nptr)
 {
