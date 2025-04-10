@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:54:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/09 18:34:38 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/10 12:33:32 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,26 @@ static char	*make_path(char *str, char *cmd)
 	return (path);
 }
 
-char	*find_cmd_path(char *cmd, char **envp)
+char	*find_cmd_path(t_pipex pipex, char **envp)
 {
 	char	**array;
 	char	*path;
 	int		i;
 
-	if (!access(cmd, X_OK))
-		return (cmd);
+	if (!access(pipex.cmd, X_OK))
+		return (pipex.cmd);
 	i = 0;
 	while (envp[i] && !ft_strnstr(envp[i], "PATH", 4))
 		i++;
+	if (!envp[i])
+		cmd_not_found(pipex);
 	array = ft_split(envp[i] + 5, ':');
 	i = 0;
 	while (array[i])
 	{
-		path = make_path(array[i], cmd);
+		path = make_path(array[i], pipex.cmd);
 		if (!access(path, X_OK))
-		{
-			while (array[i++])
-				free(array[i]);
-			return (free(array), path);
-		}
+			return (ft_free((void **)array, -1), path);
 		free(path);
 		i++;
 	}

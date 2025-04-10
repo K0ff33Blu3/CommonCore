@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:39:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/09 14:11:09 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/10 12:29:02 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_cmd(t_pipex *pipex, char *cmd, char **envp)
 		ft_error("Split fallita");
 	}
 	pipex->cmd = ft_strdup(pipex->cmd_args[0]);
-	pipex->cmd_path = find_cmd_path(pipex->cmd, envp);
+	pipex->cmd_path = find_cmd_path(*pipex, envp);
 	if (!pipex->cmd_path)
 		cmd_not_found(*pipex);
 	free(pipex->cmd_args[0]);
