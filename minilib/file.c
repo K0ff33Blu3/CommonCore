@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:31:26 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/24 12:18:52 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/10 17:39:36 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
 
-int	on_enter_window(t_mlx_data *data)
-{
-	(void)data;
-	write(1, "Welcome!\n", 9);
-	return (0);
-}
+// int	on_enter_window(t_mlx_data *data)
+// {
+// 	(void)data;
+// 	write(1, "Welcome!\n", 9);
+// 	return (0);
+// }
 
-int	on_leave_window(t_mlx_data *data)
-{
-	(void)data;
-	write(1, "Bye!\n", 5);
-	return (0);
-}
+// int	on_leave_window(t_mlx_data *data)
+// {
+// 	(void)data;
+// 	write(1, "Bye!\n", 5);
+// 	return (0);
+// }
 
 int	close_display(t_mlx_data *data)
 {
@@ -36,10 +36,12 @@ int	close_display(t_mlx_data *data)
 
 void	putpixels(t_mlx_img *img, int x, int y, int color)
 {
-	int	offset;
+	int	*offset;
+	int	index;
 
-	offset = (img->line_len * y) + (x + (img->bits_per_pixel / 8));
-	*((unsigned int *)(offset + img->addr)) = color;
+	offset = (int *)img->addr;
+	index = y * (img->line_len / 4) + x;
+	offset[index] = color;
 }
 
 void	color_screen(t_mlx_data *data, int color)
@@ -53,7 +55,7 @@ void	color_screen(t_mlx_data *data, int color)
 		x = 0;
 		while (x < WID)
 		{
-			putpixels(data->img.img_ptr, x, y, color);
+			putpixels(&data->img, x, y, color);
 			x++;
 		}
 		y++;
@@ -64,13 +66,13 @@ void	color_screen(t_mlx_data *data, int color)
 int	on_keypress(int keysym, t_mlx_data *data)
 {
 	if (keysym == XK_Escape)
-	close_display(data);
+		close_display(data);
 	else if (keysym == XK_r)
-	color_screen(data, 0xff0000);
+		color_screen(data, 0xff0000);
 	else if (keysym == XK_g)
-	color_screen(data, 0xff00);
+		color_screen(data, 0xff00);
 	else if (keysym == XK_b)
-	color_screen(data, 0xff); 
+		color_screen(data, 0xff); 
 	printf("Key %d has been pressed\n", keysym);
 	return (0);
 }
@@ -85,9 +87,9 @@ int	main(void)
 	data.mlx_window = mlx_new_window(data.mlx_ptr, WID, LEN, "New Window");
 	data.img.img_ptr = mlx_new_image(data.mlx_ptr, WID, LEN);
 	data.img.addr = mlx_get_data_addr(data.img.img_ptr, &data.img.bits_per_pixel, &data.img.line_len, &data.img.endian);
-	// mlx_put_image_to_window(data.mlx_ptr, data.mlx_window, data.img.img_ptr, 0, 0);
-	mlx_hook(data.mlx_window, EnterNotify, EnterWindowMask, on_enter_window, &data);
-	mlx_hook(data.mlx_window, LeaveNotify, LeaveWindowMask, on_leave_window, &data);
+	mlx_put_image_to_window(data.mlx_ptr, data.mlx_window, data.img.img_ptr, 0, 0);
+	// mlx_hook(data.mlx_window, EnterNotify, EnterWindowMask, on_enter_window, &data);
+	// mlx_hook(data.mlx_window, LeaveNotify, LeaveWindowMask, on_leave_window, &data);
 	mlx_hook(data.mlx_window, KeyPress, KeyPressMask, on_keypress, &data);
 	mlx_hook(data.mlx_window, DestroyNotify, NoEventMask, close_display, &data);
 	mlx_loop(data.mlx_ptr);

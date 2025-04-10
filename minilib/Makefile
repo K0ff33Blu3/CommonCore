@@ -1,8 +1,8 @@
-NAME = boh
+NAME = fractol
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = file.c
 
