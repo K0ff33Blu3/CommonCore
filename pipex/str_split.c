@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:54:43 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/22 15:54:44 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 14:14:49 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	skip_quote(char *s, int i)
 	i++;
 	while (s[i] && s[i] != quote)
 		i++;
-	if (s[i] == quote)
-		i++;
-	return (i);
+	if (!s[i])
+		return (i);
+	return (i + 1);
 }
 
 static int	countwords(char *s, char c)
@@ -33,14 +33,15 @@ static int	countwords(char *s, char c)
 
 	count = 0;
 	in_word = 0;
-	i = 0;
-	while (s[i])
+	i = -1;
+	while (s[++i])
 	{
-		if ((s[i] == 39 || s[i] == 34) && !in_word)
+		if ((s[i] == '\'' || s[i] == '\"') && !in_word)
 		{
 			in_word = 1;
 			count++;
 			i = skip_quote(s, i);
+			continue ;
 		}
 		if (s[i] != c && in_word == 0)
 		{
@@ -49,7 +50,6 @@ static int	countwords(char *s, char c)
 		}
 		else if (s[i] == c)
 			in_word = 0;
-		i++;
 	}
 	return (count);
 }

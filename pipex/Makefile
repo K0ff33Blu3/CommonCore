@@ -1,5 +1,7 @@
 NAME = pipex
 
+NAME_BONUS = pipex_bonus
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -19,25 +21,28 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ -Llibft -lft
 	@echo -e "\033[32m$(NAME) created successfully\033[0m"
 
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS) : $(OBJS_BONUS)
+	make -C libft
+	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME_BONUS) -Llibft -lft
+	@echo -e "\033[32m$(NAME_BONUS) created successfully\033[0m"
+
 %.o: %.c
-	$(CC) $(CFLAGS) -g -c $? -o $@
+	$(CC) $(CFLAGS) -g -c $< -o $@
 
 
 clean:
-	make -C libft clean
+	make clean -C libft
 	rm -f $(OBJS) $(OBJS_BONUS)
 	@echo -e "\033[32mObject files removed successfully\033[0m"
 
 fclean: clean
-	make -C libft fclean
+	make fclean -C libft
 	rm -f $(NAME)
 	@echo -e "\033[32m$(NAME) removed successfully\033[0m"
 
-bonus :
-	make -C libft
-	$(CC) $(CFLAGS) $(SRCS_BONUS) -o $(NAME) -Llibft -lft
-	@echo -e "\033[32m$(NAME) created successfully\033[0m"
 
 re: fclean all
 
-.PHONY: all clean fclean re only
+.PHONY: all clean fclean re

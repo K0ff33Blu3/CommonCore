@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:54:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/10 12:33:32 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 13:04:55 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static char	*make_path(char *str, char *cmd)
 	part_path = ft_strjoin(str, "/");
 	path = ft_strjoin(part_path, cmd);
 	free(part_path);
-	free(str);
 	return (path);
 }
 
