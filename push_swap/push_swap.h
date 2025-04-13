@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:05 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/09 15:57:37 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 11:40:27 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	rrr(t_list **stack_a, t_list **stack_b);
 void	pa(t_list **stack_a, t_list **stack_b);
 void	pb(t_list **stack_a, t_list **stack_b);
 void	check_small_stacks(t_list **stack_a, t_list **stack_b);
-void	check_error(char **arg, int **tab);
-int		**parse_integer(char **nbrs, int tab_size);
-int		**normalize_tab(int **tab, int tab_size);
+void	check_error(char **arg, long **tab);
+long			**parse_integer(char **nbrs, int tab_size);
+int		**normalize_tab(long **tab, int tab_size);
 int		is_sorted_list(t_list *node);
-int		check_double(int **nbr);
-int		check_limits(int **nbr);
+int		check_double(long **nbr);
+int		check_limits(long **nbr);
 int		check_numbers(char **nptr);
 void	radix_sort(t_list **stack_a, t_list **stack_b);
 

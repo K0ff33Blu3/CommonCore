@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   list_parse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:14 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/31 15:26:59 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 11:56:24 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	**parse_integer(char **nbrs, int tab_size)
+long	**parse_integer(char **nbrs, int tab_size)
 {
-	int	**tab;
+	long	**tab;
 	int	i;
 
 	i = 0;
-	tab = malloc(sizeof(int *) * (tab_size + 1));
+	tab = malloc(sizeof(long *) * (tab_size + 1));
 	if (!tab)
 		return (NULL);
 	while (i < tab_size)
 	{
-		tab[i] = malloc(sizeof(int));
+		tab[i] = malloc(sizeof(long));
 		if (!tab[i])
 			return (ft_free((void **)tab, i), NULL);
-		*tab[i] = ft_atoi(nbrs[i]);
+		*tab[i] = ft_atol(nbrs[i]);
 		i++;
 	}
 	tab[tab_size] = NULL;

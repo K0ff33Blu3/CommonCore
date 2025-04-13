@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:22:10 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/09 15:31:38 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 11:44:29 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_error(char **arg, int **tab)
+void	check_error(char **arg, long **tab)
 {
-	if (!check_numbers(arg) || !check_double(tab) || !check_limits(tab))
+	if (!check_numbers(arg) || !check_limits(tab) || !check_double(tab))
 	{
 		ft_free((void **)arg, -1);
 		ft_free((void **)tab, -1);
@@ -48,21 +48,23 @@ int	check_numbers(char **nptr)
 	return (1);
 }
 
-int	check_limits(int **nbr)
+int	check_limits(long **nbr)
 {
 	unsigned int	i;
+	long	long_nbr;
 
 	i = 0;
 	while (nbr[i])
 	{
-		if (*(nbr[i]) < INT_MIN || *(nbr[i]) > INT_MAX)
+		long_nbr = *nbr[i];
+		if (long_nbr < -2147483648 || long_nbr > 2147483647)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	check_double(int **nbr)
+int	check_double(long **nbr)
 {
 	unsigned int	i;
 	unsigned int	j;

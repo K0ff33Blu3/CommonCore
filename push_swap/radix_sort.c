@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:19:09 by miricci           #+#    #+#             */
-/*   Updated: 2025/03/25 12:10:49 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 11:40:11 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	**normalize_tab(int **tab, int tab_size)
+int	**normalize_tab(long **tab, int tab_size)
 {
 	int	i;
 	int	j;
