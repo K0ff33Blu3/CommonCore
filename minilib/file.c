@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:31:26 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/10 17:39:36 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:23:48 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,17 @@ int	on_keypress(int keysym, t_mlx_data *data)
 	return (0);
 }
 
+int	on_mouse_move(int keysym, int x, int y, t_mlx_data *data)
+{
+	(void)x;
+	(void)y;
+	if (keysym == SCROLL_UP)
+		data->zoom *= 1.1;
+	else if (keysym == SCROLL_DOWN)
+		data->zoom /= 0.9;
+	return 0;
+}
+
 int	main(void)
 {
 	t_mlx_data data;
@@ -90,6 +101,7 @@ int	main(void)
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_window, data.img.img_ptr, 0, 0);
 	// mlx_hook(data.mlx_window, EnterNotify, EnterWindowMask, on_enter_window, &data);
 	// mlx_hook(data.mlx_window, LeaveNotify, LeaveWindowMask, on_leave_window, &data);
+	mlx_mouse_hook(data.mlx_window, on_mouse_move, &data);
 	mlx_hook(data.mlx_window, KeyPress, KeyPressMask, on_keypress, &data);
 	mlx_hook(data.mlx_window, DestroyNotify, NoEventMask, close_display, &data);
 	mlx_loop(data.mlx_ptr);

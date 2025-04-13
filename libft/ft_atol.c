@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 18:24:01 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/13 11:40:46 by miricci          ###   ########.fr       */
+/*   Created: 2025/04/13 11:28:44 by miricci           #+#    #+#             */
+/*   Updated: 2025/04/13 12:06:40 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atol(const char *nptr)
 {
-	int	nbr;
-	int	sgn;
+	long	nbr;
+	int		sgn;
 
 	nbr = 0;
 	sgn = 1;
@@ -36,20 +36,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (sgn * nbr);
 }
-/*
-int	main(void)
-{	
-	char *n = "\010 8";
- 	int i1 = atoi(n);
- 	int i2 = ft_atoi(n);
- 	printf("atoi: %d\nft_atoi: %d\n", i1, i2);
- 
- 	if (i1 == i2)
- 	{
- 		printf("TEST_SUCCESS");
- 		return 0;
- 	}
- 	printf("TEST_FAILED");
- 	return 0;
-}
-*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:30:53 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/10 17:56:16 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:10:17 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@
 # include <stdlib.h>
 # include "minilibx-linux/mlx_int.h"
 # include "minilibx-linux/mlx.h"
+
 # define WID 640
 # define LEN 480
+
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 
 typedef struct s_mlx_img
@@ -34,6 +38,7 @@ typedef struct s_mlx_data
 {
 	void	*mlx_ptr;
 	void	*mlx_window;
+	double	zoom;
 	t_mlx_img	img;
 }	t_mlx_data;
 
