@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:22:10 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/13 11:44:29 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 12:10:24 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_numbers(char **nptr)
 int	check_limits(long **nbr)
 {
 	unsigned int	i;
-	long	long_nbr;
+	long			long_nbr;
 
 	i = 0;
 	while (nbr[i])

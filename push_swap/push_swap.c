@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/13 12:01:09 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 12:10:07 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	**define_input_style(int ac, char **av)
 {
 	char	**arg;
-	int	i;
-	
+	int		i;
+
 	i = 0;
 	if (ac == 1)
 		exit(EXIT_SUCCESS);
@@ -32,9 +32,9 @@ char	**define_input_style(int ac, char **av)
 		{
 			arg[i] = ft_strdup(*av);
 			if (!arg[i])
-				return(ft_free((void **)arg, i), NULL);
+				return (ft_free((void **)arg, i), NULL);
 			i++;
-			av++;			
+			av++;
 		}
 		arg[i] = NULL;
 	}
@@ -44,7 +44,7 @@ char	**define_input_style(int ac, char **av)
 t_list	**set_stack_a(char **arg, int n_arg)
 {
 	t_list	**stack_a;
-	long		**tab;
+	long	**tab;
 	int		**ind;
 
 	tab = parse_integer(arg, n_arg);
@@ -67,9 +67,9 @@ int	main(int ac, char **av)
 	arg = define_input_style(ac, av);
 	n_arg = array_size((void **)arg);
 	if (!*arg)
-		return(free(arg), 0);
+		return (free(arg), 0);
 	if (n_arg == 1)
-		return(ft_free((void **)arg, -1), 0);
+		return (ft_free((void **)arg, -1), 0);
 	stack_a = set_stack_a(arg, n_arg);
 	stack_b = create_list(NULL, 0);
 	if (n_arg < 6)

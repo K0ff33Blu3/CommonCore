@@ -6,7 +6,7 @@
 /*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:28:14 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/13 11:56:24 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/13 12:06:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 long	**parse_integer(char **nbrs, int tab_size)
 {
 	long	**tab;
-	int	i;
+	int		i;
 
 	i = 0;
 	tab = malloc(sizeof(long *) * (tab_size + 1));
