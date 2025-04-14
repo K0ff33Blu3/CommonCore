@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/09 15:17:18 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:51:13 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 {
 	pid_t	pid;
-	int		status;
 
 	if (pipe(pipex->pipe) == -1)
 		ft_error("pipe");
@@ -59,7 +58,6 @@ void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 		close(pipex->pipe[1]);
 		dup2(pipex->pipe[0], STDIN_FILENO);
 		close(pipex->pipe[0]);
-		waitpid(pid, &status, 0);
 	}
 }
 
@@ -90,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	pipex;
 
 	ft_memset(&pipex, 0, sizeof(t_pipex));
-	if (argc >= 5)
+	if (argc == 5)
 	{
 		if (!ft_strncmp(argv[1], "here_doc", 8))
 		{
@@ -105,7 +103,7 @@ int	main(int argc, char **argv, char **envp)
 	else
 	{
 		ft_putstr_fd("Wrong argument number\n", STDERR_FILENO);
-		ft_putstr_fd("Inserire almeno 4 argomenti\n", STDOUT_FILENO);
+		ft_putstr_fd("Inserire 4 argomenti\n", STDOUT_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	return (0);

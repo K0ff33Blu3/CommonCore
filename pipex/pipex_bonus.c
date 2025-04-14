@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/09 15:17:18 by miricci          ###   ########.fr       */
+/*   Created: 2025/04/10 12:50:19 by miricci           #+#    #+#             */
+/*   Updated: 2025/04/14 14:50:15 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	close_pipe(t_pipex pipex)
 {
@@ -39,7 +39,6 @@ static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 {
 	pid_t	pid;
-	int		status;
 
 	if (pipe(pipex->pipe) == -1)
 		ft_error("pipe");
@@ -59,7 +58,6 @@ void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 		close(pipex->pipe[1]);
 		dup2(pipex->pipe[0], STDIN_FILENO);
 		close(pipex->pipe[0]);
-		waitpid(pid, &status, 0);
 	}
 }
 

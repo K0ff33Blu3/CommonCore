@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:54:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/13 13:04:55 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:41:56 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,14 @@ char	*find_cmd_path(t_pipex pipex, char **envp)
 		free(path);
 		i++;
 	}
-	free(array);
+	i = 0;
+	while (array[i])
+	{
+		ft_putstr_fd(array[i], 2);
+		ft_putstr_fd("\n", 2);
+		i++;
+	}
+	ft_free((void **)array, -1);
 	return (NULL);
 }
 /*

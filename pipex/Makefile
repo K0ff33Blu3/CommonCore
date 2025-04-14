@@ -1,48 +1,67 @@
-NAME = pipex
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/04/10 13:05:26 by miricci           #+#    #+#              #
+#    Updated: 2025/04/10 13:08:18 by miricci          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME_BONUS = pipex_bonus
+NAME        = pipex
+BONUS_NAME  = pipex_bonus
 
-CC = cc
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g
 
-CFLAGS = -Wall -Wextra -Werror
+LIBFT_DIR   = libft
+LIBFT_LIB   = $(LIBFT_DIR)/libft.a
 
-SRCS = pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
+SRCS        = pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
+SRCS_BONUS  = pipex_bonus.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS        = $(SRCS:.c=.o)
+OBJS_BONUS  = $(SRCS_BONUS:.c=.o)
 
-SRCS_BONUS = pipex_bonus.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
-
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-
+# Default
 all: $(NAME)
 
-$(NAME) : $(OBJS)
-	make -C libft
-	$(CC) $(CFLAGS) $^ -o $@ -Llibft -lft
-	@echo -e "\033[32m$(NAME) created successfully\033[0m"
+# Compile base version
+$(NAME): $(OBJS) $(LIBFT_LIB)
+	@$(CC) $(CFLAGS) $^ -o $@ -L$(LIBFT_DIR) -lft
+	@echo -e "\033[32m$(NAME) created successfully!\033[0m"
 
-bonus: $(NAME_BONUS)
+# Compile bonus version
+bonus: $(BONUS_NAME)
 
-$(NAME_BONUS) : $(OBJS_BONUS)
-	make -C libft
-	$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME_BONUS) -Llibft -lft
-	@echo -e "\033[32m$(NAME_BONUS) created successfully\033[0m"
+$(BONUS_NAME): $(OBJS_BONUS) $(LIBFT_LIB)
+	@$(CC) $(CFLAGS) $^ -o $@ -L$(LIBFT_DIR) -lft
+	@echo -e "\033[36m$(BONUS_NAME) compiled with bonus powers!\033[0m"
 
+# Object compilation
 %.o: %.c
-	$(CC) $(CFLAGS) -g -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -e "\033[90mCompiled $<\033[0m"
 
+# Libft build
+$(LIBFT_LIB):
+	@make -C $(LIBFT_DIR)
 
+# Clean .o files
 clean:
-	make clean -C libft
-	rm -f $(OBJS) $(OBJS_BONUS)
-	@echo -e "\033[32mObject files removed successfully\033[0m"
+	@make -C $(LIBFT_DIR) clean
+	@rm -f $(OBJS) $(OBJS_BONUS)
+	@echo -e "\033[33mObject files removed.\033[0m"
 
+# Full clean
 fclean: clean
-	make fclean -C libft
-	rm -f $(NAME)
-	@echo -e "\033[32m$(NAME) removed successfully\033[0m"
+	@make -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME) $(BONUS_NAME)
+	@echo -e "\033[31mBinaries wiped.\033[0m"
 
-
+# Full rebuild
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
