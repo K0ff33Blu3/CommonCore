@@ -12,12 +12,12 @@
 
 #include "pipex.h"
 
-void	close_all(t_pipex pipex)
+void	close_all(t_pipex *pipex)
 {
-	close(pipex.in_fd);
-	close(pipex.out_fd);
-	close(pipex.pipe[0]);
-	close(pipex.pipe[1]);
+	close(pipex->in_fd);
+	close(pipex->out_fd);
+	close(pipex->pipe[0]);
+	close(pipex->pipe[1]);
 }
 
 void	cmd_not_found(t_pipex pipex)
@@ -26,6 +26,7 @@ void	cmd_not_found(t_pipex pipex)
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	ft_free((void **)pipex.cmd_args, -1);
 	ft_free((void **)pipex.all_cmds, -1);
+	// close(pipex.out_fd);
 	free(pipex.cmd_path);
 	free(pipex.cmd);
 	exit(127);

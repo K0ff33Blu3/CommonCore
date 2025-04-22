@@ -22,7 +22,7 @@ static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
 {
 	parse_cmd(&pipex, cmd, envp);
 	dup2(pipex.pipe[0], STDIN_FILENO);
-	close(pipex.pipe[1]);
+	// close(pipex.pipe[1]);
 	if (access(outfile, W_OK) == -1)
 	{
 		ft_free((void **)pipex.cmd_args, -1);
@@ -47,9 +47,9 @@ void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 		ft_error("fork");
 	if (pid == 0)
 	{
-		close(pipex->pipe[0]);
 		dup2(pipex->pipe[1], STDOUT_FILENO);
-		close(pipex->pipe[1]);
+		close_pipe(*pipex);
+		close(pipex->out_fd);
 		parse_cmd(pipex, cmd, envp);
 		exec_command(*pipex, envp);
 	}
@@ -76,7 +76,8 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 	if (pid2 == 0)
 		last_child(pipex, pipex.all_cmds[pipex.n_cmd - 1],
 			argv[argc - 1], envp);
-	close_all(pipex);
+	// close_all(&pipex);
+	close(pipex.out_fd);
 	ft_free((void **)pipex.all_cmds, -1);
 	waitpid(pid2, &status2, 0);
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))

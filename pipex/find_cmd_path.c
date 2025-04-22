@@ -47,12 +47,6 @@ char	*find_cmd_path(t_pipex pipex, char **envp)
 		i++;
 	}
 	i = 0;
-	while (array[i])
-	{
-		ft_putstr_fd(array[i], 2);
-		ft_putstr_fd("\n", 2);
-		i++;
-	}
 	ft_free((void **)array, -1);
 	return (NULL);
 }

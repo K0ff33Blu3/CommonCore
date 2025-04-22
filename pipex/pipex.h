@@ -37,7 +37,7 @@ typedef struct s_pipex
 char	*find_cmd_path(t_pipex pipex, char **envp);
 char	**str_split(char *s, char c);
 char	**fill_split(char **dest, const char *s, char c, int words);
-void	close_all(t_pipex pipex);
+void	close_all(t_pipex *pipex);
 void	close_pipe(t_pipex pipex);
 void	cmd_not_found(t_pipex pipex);
 void	ft_error(char *str);

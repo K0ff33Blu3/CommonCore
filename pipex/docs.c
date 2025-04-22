@@ -31,6 +31,8 @@ void	input_doc(t_pipex *pipex, char **argv, int argc)
 	pipex->out_fd = open(argv[argc -1], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (access(argv[1], R_OK) == -1)
 	{
+		close(pipex->in_fd);
+		close(pipex->out_fd);
 		ft_free((void **)pipex->all_cmds, -1);
 		ft_error(argv[1]);
 	}
