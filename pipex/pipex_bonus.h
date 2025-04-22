@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:50:43 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/10 12:50:55 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:02:16 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_pipex
 char	*find_cmd_path(t_pipex pipex, char **envp);
 char	**str_split(char *s, char c);
 char	**fill_split(char **dest, const char *s, char c, int words);
-void	close_all(t_pipex pipex);
+void	close_std(void);
 void	close_pipe(t_pipex pipex);
 void	cmd_not_found(t_pipex pipex);
 void	ft_error(char *str);

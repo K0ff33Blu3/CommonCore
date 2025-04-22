@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/14 14:51:13 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:56:41 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ void	close_pipe(t_pipex pipex)
 	close(pipex.pipe[1]);
 }
 
-static void	last_child(t_pipex pipex, char *cmd, char *outfile, char **envp)
+static void	last_child(t_pipex *pipex, char *cmd, char *outfile, char **envp)
 {
-	parse_cmd(&pipex, cmd, envp);
-	dup2(pipex.pipe[0], STDIN_FILENO);
-	// close(pipex.pipe[1]);
+	parse_cmd(pipex, cmd, envp);
+	dup2(pipex->pipe[0], STDIN_FILENO);
 	if (access(outfile, W_OK) == -1)
 	{
-		ft_free((void **)pipex.cmd_args, -1);
-		ft_free((void **)pipex.all_cmds, -1);
-		free(pipex.cmd);
-		free(pipex.cmd_path);
+		ft_free((void **)pipex->cmd_args, -1);
+		ft_free((void **)pipex->all_cmds, -1);
+		free(pipex->cmd);
+		free(pipex->cmd_path);
 		ft_error(outfile);
 	}
-	dup2(pipex.out_fd, STDOUT_FILENO);
-	close(pipex.out_fd);
-	exec_command(pipex, envp);
+	dup2(pipex->out_fd, STDOUT_FILENO);
+	close(pipex->out_fd);
+	close_pipe(*pipex);
+	exec_command(*pipex, envp);
 }
 
 void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
@@ -74,10 +74,10 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 	if (pid2 < 0)
 		ft_error("fork");
 	if (pid2 == 0)
-		last_child(pipex, pipex.all_cmds[pipex.n_cmd - 1],
+		last_child(&pipex, pipex.all_cmds[pipex.n_cmd - 1],
 			argv[argc - 1], envp);
-	// close_all(&pipex);
 	close(pipex.out_fd);
+	close_std();
 	ft_free((void **)pipex.all_cmds, -1);
 	waitpid(pid2, &status2, 0);
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))
@@ -105,6 +105,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_putstr_fd("Wrong argument number\n", STDERR_FILENO);
 		ft_putstr_fd("Inserire 4 argomenti\n", STDOUT_FILENO);
+		close_std();
 		exit(EXIT_FAILURE);
 	}
 	return (0);

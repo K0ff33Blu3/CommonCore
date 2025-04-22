@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:47:03 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/07 16:19:32 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:43:14 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	input_doc(t_pipex *pipex, char **argv, int argc)
 	pipex->n_cmd = i;
 	pipex->in_fd = open(argv[1], O_RDONLY);
 	pipex->out_fd = open(argv[argc -1], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (access(argv[1], R_OK) == -1)
+	if (pipex->in_fd == -1)
 	{
-		close(pipex->in_fd);
 		close(pipex->out_fd);
-		ft_free((void **)pipex->all_cmds, -1);
-		ft_error(argv[1]);
+		// ft_free((void **)pipex->all_cmds, -1);
+		perror(argv[1]);
+		return ;
 	}
 	dup2(pipex->in_fd, STDIN_FILENO);
 	close(pipex->in_fd);

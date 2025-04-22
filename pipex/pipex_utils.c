@@ -6,18 +6,17 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:39:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/14 12:23:52 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:09:09 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	close_all(t_pipex *pipex)
+void	close_std(void)
 {
-	close(pipex->in_fd);
-	close(pipex->out_fd);
-	close(pipex->pipe[0]);
-	close(pipex->pipe[1]);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 }
 
 void	cmd_not_found(t_pipex pipex)
@@ -26,7 +25,8 @@ void	cmd_not_found(t_pipex pipex)
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	ft_free((void **)pipex.cmd_args, -1);
 	ft_free((void **)pipex.all_cmds, -1);
-	// close(pipex.out_fd);
+	close(pipex.out_fd);
+	close_std();
 	free(pipex.cmd_path);
 	free(pipex.cmd);
 	exit(127);
@@ -35,6 +35,7 @@ void	cmd_not_found(t_pipex pipex)
 void	ft_error(char *str)
 {
 	perror(str);
+	close_std();
 	exit(EXIT_FAILURE);
 }
 
