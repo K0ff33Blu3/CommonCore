@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file.h                                             :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:30:53 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/23 12:58:11 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/23 20:31:18 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILE_H
-# define FILE_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <float.h>
 # include "minilibx-linux/mlx_int.h"
 # include "minilibx-linux/mlx.h"
 
-# define WID 640
-# define LEN 480
+# define WID 1800
+# define LEN 1800
 
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
@@ -30,41 +32,35 @@
 # define GREEN 0x00ff00
 # define RED 0xff0000
 
-
-typedef struct s_mlx_img
-{
-	void	*img_ptr;
-	char	*addr;
-	int	bits_per_pixel;
-	int	line_len;
-	int	endian;
-}	t_mlx_img;
-
-typedef struct s_mlx_data
+typedef struct s_fractal
 {
 	void	*mlx_ptr;
 	void	*mlx_window;
-	double	zoom;
-	t_mlx_img	img;
-}	t_mlx_data;
-
-typedef struct s_fractal
-{
-	t_mlx_data	data;
+	void	*img_ptr;
+	char	*img_addr;
+	int	bits_per_pixel;
+	int	line_len;
+	int	endian;
 	char	*name;
 	int	x;
 	int	y;
-	double	zx;
-	double	zy;
 	double	cx;
 	double	cy;
-	double	zoom;	
+	double	zoom;
+	int	offset_x;
+	int	offset_y;
+	int	max_iteration;
+	int	color;
 }	t_fractal;
 
-int	on_keypress(int keysym, t_mlx_data *data);
-int	close_display(t_mlx_data *data);
-// int	on_enter_window(t_mlx_data *data);
-void	put_image(t_mlx_data *data);
-void	putpixels(t_mlx_img *img, int x, int y, int color);
+int	on_keypress(int keysym, t_fractal *fractal);
+int	on_mouse_scroll(int button, int x, int y, t_fractal *fractal);
+int	close_display(t_fractal *fractal);
+void	put_image(t_fractal *t_fractal);
+void	putpixels(t_fractal *fractal, int x, int y, int color);
+void	mandelbrot(t_fractal *fractal);
+void	init_fractal(t_fractal *fractal);
+void	init_mlx(t_fractal *fractal);
+void	init_hooks(t_fractal *fractal);
 
 #endif
