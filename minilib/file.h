@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:30:53 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/11 11:10:17 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/23 12:58:11 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
+
+# define BLACK 0x000000
+# define WHITE 0xffffff
+# define BLUE  0x0000ff
+# define GREEN 0x00ff00
+# define RED 0xff0000
 
 
 typedef struct s_mlx_img
@@ -57,8 +63,8 @@ typedef struct s_fractal
 
 int	on_keypress(int keysym, t_mlx_data *data);
 int	close_display(t_mlx_data *data);
-int	on_enter_window(t_mlx_data *data);
-void	color_screen(t_mlx_data *data, int color);
+// int	on_enter_window(t_mlx_data *data);
+void	put_image(t_mlx_data *data);
 void	putpixels(t_mlx_img *img, int x, int y, int color);
 
 #endif

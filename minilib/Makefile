@@ -10,7 +10,7 @@ OBJ = $(SRC:.c=.o)
 
 LIB_DIR = minilibx-linux
 
-LIBFLAGS = -L$(LIB_DIR) -lmlx -lXext -lX11
+LIBFLAGS = -L$(LIB_DIR) -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
 
