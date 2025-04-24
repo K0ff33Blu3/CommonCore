@@ -21,23 +21,21 @@ int	on_keypress(int keysym, t_fractal *fractal)
 
 void	zoom(t_fractal *fractal, int x, int y, int button)
 {
-	double zoom_rate;
-	
+	double	zoom_rate;
+	double	mouse_re;
+	double	mouse_im;
+
 	zoom_rate = 1.05;
+	mouse_re = (x - LEN / 2.0) / fractal->zoom + fractal->offset_x;
+	mouse_im = (y - WID / 2.0) / fractal->zoom + fractal->offset_y;
 	if (button == SCROLL_UP)
-	{
-		fractal->offset_x = (x / fractal->zoom + fractal->offset_x) - (x / (fractal->zoom * zoom_rate));
-		fractal->offset_y = (y / fractal->zoom + fractal->offset_y) - (y / (fractal->zoom * zoom_rate));
 		fractal->zoom *= zoom_rate;
-	}
 	else if (button == SCROLL_DOWN)
-	{
-		fractal->offset_x = (x / fractal->zoom + fractal->offset_x) - (x / (fractal->zoom * zoom_rate));
-		fractal->offset_y = (y / fractal->zoom + fractal->offset_y) - (y / (fractal->zoom * zoom_rate));
 		fractal->zoom /= zoom_rate;
-	}
 	else
 		return ;
+	fractal->offset_x = mouse_re - (x - LEN / 2.0) / fractal->zoom;
+	fractal->offset_y = mouse_im - (y - WID / 2.0) / fractal->zoom;
 }
 
 int	on_mouse_scroll(int button, int x, int y, t_fractal *fractal)

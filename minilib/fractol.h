@@ -20,8 +20,8 @@
 # include "minilibx-linux/mlx_int.h"
 # include "minilibx-linux/mlx.h"
 
-# define WID 1800
-# define LEN 1800
+# define WID 640
+# define LEN 640
 
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
@@ -47,8 +47,8 @@ typedef struct s_fractal
 	double	cx;
 	double	cy;
 	double	zoom;
-	int	offset_x;
-	int	offset_y;
+	double	offset_x;
+	double	offset_y;
 	int	max_iteration;
 	int	color;
 }	t_fractal;

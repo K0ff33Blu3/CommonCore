@@ -17,6 +17,7 @@ int	close_display(t_fractal *fractal)
 	mlx_destroy_window(fractal->mlx_ptr, fractal->mlx_window);
 	mlx_destroy_display(fractal->mlx_ptr);
 	free(fractal->mlx_ptr);
+	// free(fractal);
 	exit(EXIT_SUCCESS);
 }
 
@@ -65,7 +66,8 @@ int	main(void)
 	mlx_destroy_image(fractal->mlx_ptr, fractal->img_ptr);
 	mlx_destroy_window(fractal->mlx_ptr, fractal->mlx_window);
 	mlx_destroy_display(fractal->mlx_ptr);
-	free(fractal->img_ptr);
+	// free(fractal->img_ptr);
 	free(fractal->mlx_ptr);
+	free(fractal);
 	return (0);
 }

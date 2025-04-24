@@ -23,7 +23,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -g -c $? -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJ)
 	@echo -e "\033[32mObject files removed successfully\033[0m"
 
 fclean: clean

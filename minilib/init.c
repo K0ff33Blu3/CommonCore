@@ -16,10 +16,10 @@ void	init_fractal(t_fractal *fractal)
 {
 	fractal->x = 0;
 	fractal->y = 0;
-	fractal->zoom = 450;
+	fractal->zoom = 100;
 	fractal->color = 0xd36582;
-	fractal->offset_x = -2.5;
-	fractal->offset_y = -2.5;
+	fractal->offset_x = 0;
+	fractal->offset_y = 0;
 	fractal->max_iteration = 25;
 }
 
