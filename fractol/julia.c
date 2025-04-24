@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 19:22:50 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/23 20:30:38 by miricci          ###   ########.fr       */
+/*   Created: 2025/04/24 15:43:46 by miricci           #+#    #+#             */
+/*   Updated: 2025/04/24 16:23:38 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	mandelbrot(t_fractal *fractal)
+void	julia(t_fractal *fractal)
 {
 	int	i;
+	double x_tmp;
 	double zx;
 	double zy;
-	double x_tmp;
 
-	fractal->name = "mandelbrot";
 	i = 0;
-	zx = 0;
-	zy = 0;
-	fractal->cx = ((fractal->x - LEN / 2.0) / fractal->zoom) + fractal->offset_x;
-	fractal->cy = ((fractal->y - WID / 2.0) / fractal->zoom) + fractal->offset_y;
+	zx = ((fractal->x - LEN / 2.0) / fractal->zoom) + fractal->offset_x;
+	zy = ((fractal->y - WID / 2.0) / fractal->zoom) + fractal->offset_y;
 	while (++i < fractal->max_iteration)
 	{
 		x_tmp = zx * zx - zy * zy + fractal->cx;
@@ -37,4 +34,22 @@ void	mandelbrot(t_fractal *fractal)
 		putpixels(fractal, fractal->x, fractal->y, 0x000000);
 	else
 		putpixels(fractal, fractal->x, fractal->y, fractal->color * i);
+}
+
+void	put_julia(t_fractal *fractal)
+{
+	fractal->x = 0;
+	fractal->y = 0;
+	while (fractal->y < LEN)
+	{
+		while (fractal->x < WID)
+		{
+			julia(fractal);
+			fractal->x++;
+		}
+		fractal->x = 0;
+		fractal->y++;
+	}
+	mlx_put_image_to_window(fractal->mlx_ptr,
+		fractal->mlx_window, fractal->img_ptr, 0, 0);
 }

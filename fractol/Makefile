@@ -4,7 +4,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = main.c mandelbrot.c init.c hooks.c
+SRC = main.c mandelbrot.c init.c hooks.c utils.c julia.c
 
 OBJ = $(SRC:.c=.o)
 

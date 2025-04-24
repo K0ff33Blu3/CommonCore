@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:15:30 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/24 00:07:34 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:08:16 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	zoom(t_fractal *fractal, int x, int y, int button)
 
 int	on_mouse_scroll(int button, int x, int y, t_fractal *fractal)
 {
-	(void)x;
-	(void)y;
 	if (button == SCROLL_UP || SCROLL_DOWN)
 		zoom(fractal, x, y, button);
-	put_image(fractal);
+	if (!ft_strncmp(fractal->name, "mandelbrot", 10))
+		put_mandelbrot(fractal);
+	if (!ft_strncmp(fractal->name, "julia", 5))
+		put_julia(fractal);
 	return (0);
 }

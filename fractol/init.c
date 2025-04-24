@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:05:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/23 23:39:53 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/24 15:30:57 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_fractal(t_fractal *fractal)
 	fractal->color = 0xd36582;
 	fractal->offset_x = 0;
 	fractal->offset_y = 0;
-	fractal->max_iteration = 25;
+	fractal->max_iteration = 45;
 }
 
 void	init_mlx(t_fractal *fractal)

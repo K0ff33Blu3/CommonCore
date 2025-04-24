@@ -3,10 +3,13 @@
 *a.out
 
 # escludo tutti gli infile e outfile di pipex
-out*
-in*
+pipex/out*
+pipex/in*
+
 # escludo tutti i tester di pipex
 pipex-tester/
 pipex_tester_42
 deepthought.txt
 
+# escludo tutta minilibx
+fractol/minilibx-linux/*
