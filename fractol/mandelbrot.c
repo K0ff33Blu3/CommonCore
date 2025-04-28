@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:22:50 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/24 15:14:41 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:37:12 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	mandelbrot(t_fractal *fractal)
 {
-	int	i;
-	double zx;
-	double zy;
-	double x_tmp;
+	int		i;
+	double	x_tmp;
 
 	i = 0;
-	zx = 0;
-	zy = 0;
-	fractal->cx = ((fractal->x - LEN / 2.0) / fractal->zoom) + fractal->offset_x;
-	fractal->cy = ((fractal->y - WID / 2.0) / fractal->zoom) + fractal->offset_y;
+	fractal->zx = 0;
+	fractal->zy = 0;
+	fractal->cx = ((fractal->x - LEN / 2.0)
+			/ fractal->zoom) + fractal->offset_x;
+	fractal->cy = ((fractal->y - WID / 2.0)
+			/ fractal->zoom) + fractal->offset_y;
 	while (++i < fractal->max_iteration)
 	{
-		x_tmp = zx * zx - zy * zy + fractal->cx;
-		zy = 2 * zx * zy + fractal->cy;
-		zx = x_tmp;
-		if (zx * zx + zy * zy >= 4.0)
+		x_tmp = fractal->zx * fractal->zx - fractal->zy * fractal->zy + fractal->cx;
+		fractal->zy = 2 * fractal->zx * fractal->zy + fractal->cy;
+		fractal->zx = x_tmp;
+		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)
 			break ;
 	}
 	if (i == fractal->max_iteration)

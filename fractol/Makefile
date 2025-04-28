@@ -2,9 +2,9 @@ NAME = fractol
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -O3
 
-SRC = main.c mandelbrot.c init.c hooks.c utils.c julia.c
+SRC = main.c mandelbrot.c init.c hooks.c nbr_utils.c julia.c ft_split.c str_utils.c error.c burning_ship.c
 
 OBJ = $(SRC:.c=.o)
 

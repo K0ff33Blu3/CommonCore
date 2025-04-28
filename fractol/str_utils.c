@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:40:17 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/24 20:25:43 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/28 15:20:44 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_free(void **s, int i)
 {
-	while (*s)
-		write(fd, s++, 1);
+	int	j;
+
+	if (i == -1)
+	{
+		j = 0;
+		while (s[j])
+			free(s[j++]);
+	}
+	else
+	{
+		while (--i >= 0)
+			free(s[i]);
+	}
+	free(s);
 }
+
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char	*dest_c;
@@ -84,38 +97,4 @@ char	*ft_strdup(char *src)
 	ft_memcpy(dst, src, len);
 	*(dst + len) = 0;
 	return (dst);
-}
-
-double	ft_atodbl(const char *nptr)
-{
-	double	nbr;
-	int	sgn;
-
-	nbr = 0.0;
-	sgn = 1;
-	while (ft_isspace(*nptr) == 1)
-		nptr++;
-	if (*nptr == 43 || *nptr == 45)
-	{
-		if (*nptr == 45)
-			sgn = -1;
-		nptr++;
-	}
-	while (1)
-	{
-		if (!(*nptr >= 48 && *nptr <= 57) && *nptr != '.' || !*nptr)
-			return (sgn * nbr);
-		if (*nptr == '.')
-			break ;
-		nbr = (nbr * 10) + (*nptr - 48);
-		nptr++;
-	}
-	nptr++;
-	while (*nptr)
-	{
-		if (!(*nptr >= 48 && *nptr <= 57))
-			return (sgn * nbr);
-		nbr = nbr + ((*nptr - 48) * 0.1);
-	}
-	return (sgn * nbr);
 }
