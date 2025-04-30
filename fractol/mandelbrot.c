@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 19:22:50 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/28 15:37:12 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/30 13:59:04 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	mandelbrot(t_fractal *fractal)
 			/ fractal->zoom) + fractal->offset_y;
 	while (++i < fractal->max_iteration)
 	{
-		x_tmp = fractal->zx * fractal->zx - fractal->zy * fractal->zy + fractal->cx;
+		x_tmp = fractal->zx * fractal->zx
+			- fractal->zy * fractal->zy + fractal->cx;
 		fractal->zy = 2 * fractal->zx * fractal->zy + fractal->cy;
 		fractal->zx = x_tmp;
 		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)

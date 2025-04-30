@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:29:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/28 16:03:30 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/30 14:06:00 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,32 @@ double	ft_abs(double nbr)
 	return (nbr);
 }
 
+static void	calc_burning_ship(t_fractal *fractal)
+{
+	double	zx_abs;
+	double	zy_abs;
+	double	x_tmp;
+
+	zx_abs = ft_abs(fractal->zx);
+	zy_abs = ft_abs(fractal->zy);
+	x_tmp = zx_abs * zx_abs - zy_abs * zy_abs + fractal->cx;
+	fractal->zy = 2 * zx_abs * zy_abs + fractal->cy;
+	fractal->zx = x_tmp;
+}
 void	burning_ship(t_fractal *fractal)
 {
 	int		i;
-	double	x_tmp;
-	double	zx_abs;
-	double	zy_abs;
 	
+	i = 0;
 	fractal->zx = 0;
 	fractal->zy = 0;
-	i = 0;
 	fractal->cx = ((fractal->x - WID / 2.0)
 			/ fractal->zoom) + fractal->offset_x;
 	fractal->cy = ((fractal->y - LEN / 2.0)
 			/ fractal->zoom) + fractal->offset_y;
 	while (++i < fractal->max_iteration)
 	{
-		zx_abs = ft_abs(fractal->zx);
-		zy_abs = ft_abs(fractal->zy);
-		x_tmp = zx_abs * zx_abs - zy_abs * zy_abs + fractal->cx;
-		fractal->zy = 2 * zx_abs * zy_abs + fractal->cy;
-		fractal->zx = x_tmp;
+		calc_burning_ship(fractal);
 		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)
 			break ;
 	}

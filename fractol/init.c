@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:05:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/28 15:54:24 by miricci          ###   ########.fr       */
+/*   Updated: 2025/04/30 15:39:42 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	set_julia(t_fractal *fractal, char *re, char *im)
 {
 	if (!check_float(re) || !check_float(im))
-		invalid_params(fractal, "Errorino\n");
+		invalid_params(fractal, ERROR_TEXT);
 	fractal->name = ft_strdup("julia");
 	fractal->cx = ft_atof(re);
 	fractal->cy = ft_atof(im);
@@ -32,23 +32,25 @@ void	parse_input(int argc, char **argv, t_fractal *fractal)
 		else if (!ft_strncmp(argv[1], "burning ship", 12))
 			fractal->name = ft_strdup("burning ship");
 		else
-			invalid_params(fractal, "Errorino\n");
+			invalid_params(fractal, ERROR_TEXT);
 	}
 	else if (argc == 4)
 	{
 		if (!ft_strncmp(argv[1], "julia", 5))
 			set_julia(fractal, argv[2], argv[3]);
 		else
-			invalid_params(fractal, "Errorino\n");
+			invalid_params(fractal, ERROR_TEXT);
 	}
 	else
-		invalid_params(fractal, "Errorino\n");
+		invalid_params(fractal, ERROR_TEXT);
 }
 
 void	init_fractal(t_fractal *fractal)
 {
 	fractal->x = 0;
 	fractal->y = 0;
+	fractal->zx = 0;
+	fractal->zy = 0;
 	fractal->zoom = 100;
 	fractal->color = COLOR;
 	fractal->offset_x = 0;
