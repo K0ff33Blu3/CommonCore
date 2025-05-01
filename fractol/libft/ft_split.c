@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
+/*   By: miricci <miricci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 16:28:10 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/28 10:59:46 by miricci          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:18:33 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "fractol.h"
+#include "libft.h"
 
 static int	countwords(const char *s, char c)
 {

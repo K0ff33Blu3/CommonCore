@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:29:22 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/30 14:06:00 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/01 13:48:22 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ static void	calc_burning_ship(t_fractal *fractal)
 	fractal->zy = 2 * zx_abs * zy_abs + fractal->cy;
 	fractal->zx = x_tmp;
 }
+
 void	burning_ship(t_fractal *fractal)
 {
 	int		i;
-	
+
 	i = 0;
 	fractal->zx = 0;
 	fractal->zy = 0;

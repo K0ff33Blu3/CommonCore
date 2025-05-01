@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:43:46 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/28 15:35:57 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/01 13:49:36 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ void	julia(t_fractal *fractal)
 	double	x_tmp;
 
 	i = 0;
-	fractal->zx = ((fractal->x - LEN / 2.0) / fractal->zoom) + fractal->offset_x;
-	fractal->zy = ((fractal->y - WID / 2.0) / fractal->zoom) + fractal->offset_y;
+	fractal->zx = ((fractal->x - LEN / 2.0)
+			/ fractal->zoom) + fractal->offset_x;
+	fractal->zy = ((fractal->y - WID / 2.0)
+			/ fractal->zoom) + fractal->offset_y;
 	while (++i < fractal->max_iteration)
 	{
-		x_tmp = fractal->zx * fractal->zx - fractal->zy * fractal->zy + fractal->cx;
+		x_tmp = fractal->zx * fractal->zx
+			- fractal->zy * fractal->zy + fractal->cx;
 		fractal->zy = 2 * fractal->zx * fractal->zy + fractal->cy;
 		fractal->zx = x_tmp;
 		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)

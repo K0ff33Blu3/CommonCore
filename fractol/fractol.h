@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:30:53 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/30 15:40:21 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/01 14:35:24 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <float.h>
 # include <stddef.h>
 # include <unistd.h>
+# include "libft/libft.h"
 # include "minilibx-linux/mlx_int.h"
 # include "minilibx-linux/mlx.h"
 
@@ -34,9 +35,14 @@
 # define ARROW_UP     65362
 # define ARROW_RIGHT  65363
 # define ARROW_DOWN   65364
+# define C_KEY		99
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~ STYLE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-# define COLOR     0xab3428
+# define COLOR0 0xf2f2f2
+# define COLOR1 0x0b0033
+# define COLOR2 0x3700b3
+# define COLOR3 0x03dac6
+
 # define MAX_ITER  120
 
 # define ERROR_TEXT "\
@@ -50,7 +56,7 @@ Opzioni disponibili:\n\
   - burning ship\n\
 \n\
 Per favore, scegli una delle opzioni sopra.\n\
-Oppure continua a premere tasti a caso e vediamo dove ci porta il destino.\n\"
+Oppure continua a premere tasti a caso e vediamo dove ci porta il destino.\n\\"
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~ STRUCT FOR FRACTAL ~~~~~~~~~~~~~~~~~~~~~~~ */
 typedef struct s_fractal
@@ -113,5 +119,6 @@ int		check_float(char *nptr);
 void	ft_free(void **s, int i);
 size_t	ft_strlen(const char *s);
 void	move(t_fractal *fractal, int keysym);
+void	set_color(t_fractal *fractal, int i);
 
 #endif

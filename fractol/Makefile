@@ -1,56 +1,61 @@
-NAME = fractol
-BONUS = fractol_bonus
+NAME        = fractol
+BONUS       = fractol_bonus
 
-# ==== compiler ====
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -O3
+# ==== Compiler ====
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g -O3
 
-# ==== source files ====
-SRC = main.c mandelbrot.c init.c hooks.c nbr_utils.c julia.c error.c burning_ship.c render.c
-SRC_BONUS = main_bonus.c mandelbrot.c init.c hooks.c nbr_utils.c julia.c error.c burning_ship.c render.c
+# ==== Sources ====
+SRC         = main.c mandelbrot.c init.c hooks.c utils.c julia.c error.c burning_ship.c render.c
+SRC_BONUS   = main_bonus.c mandelbrot.c init.c hooks.c utils.c julia.c error.c burning_ship.c render.c
 
-OBJ		= $(SRC:.c=.o)
-OBJ_BONUS	= $(SRC_BONUS:.c=.o)
+OBJ         = $(SRC:.c=.o)
+OBJ_BONUS   = $(SRC_BONUS:.c=.o)
 
-# ==== library directory ====
-LIBFT_DIR	= libft
-MLX_DIR		= minilibx-linux
+# ==== Library Directories ====
+LIBFT_DIR   = libft
+MLX_DIR     = minilibx-linux
 
-# ==== libraries ====
-LIBFT		= -L$(LIBFT_DIR) -lft
-MLX		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-
+# ==== Libraries ====
+LIBFT_A     = $(LIBFT_DIR)/libft.a
+LIBFT       = -L$(LIBFT_DIR) -lft
+MLX         = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 INCLUDES    = -I$(LIBFT_DIR) -I$(MLX_DIR)
 
-# ==== rules ====
+# ==== Silence Entering/Leaving ====
+MAKEFLAGS  += --no-print-directory
+
+# ==== Rules ====
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	@$(MAKE) -C $(MLX_DIR)
-	@$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBFT) $(INCLUDES)
-	@echo -e "\033[32m$(NAME) created successfully\033[0m"
+bonus: $(BONUS)
 
-bonus: $(OBJ_BONUS) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT_A)
 	@$(MAKE) -C $(MLX_DIR)
-	@$(CC) $(CFLAGS) $^ -o $(BONUS) $(MLX) $(LIBFT) $(INCLUDES)
-	@echo -e "\033[32m$(BONUS) created successfully\033[0m"
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(MLX) $(LIBFT) $(INCLUDES)
+	@echo -e "\033[32m✔ $(NAME) created successfully\033[0m"
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(BONUS): $(OBJ_BONUS) $(LIBFT_A)
+	@$(MAKE) -C $(MLX_DIR)
+	@$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(BONUS) $(MLX) $(LIBFT) $(INCLUDES)
+	@echo -e "\033[32m✔ $(BONUS) created successfully\033[0m"
+
+$(LIBFT_A):
+	@$(MAKE) -C $(LIBFT_DIR)
+	@echo -e "\033[36m✔ libft.a built\033[0m"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo -e "\033[90mCompiled $<\033[0m"
+	@echo -e "\033[90m• Compiled $<\033[0m"
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
-	@rm -f $(OBJ)
-	@echo -e "\033[32mObject files removed successfully\033[0m"
+	@rm -f $(OBJ) $(OBJ_BONUS)
+	@echo -e "\033[33m✘ $(NAME) object files removed\033[0m"
 
 fclean: clean
-	@$(MAKE) -C $(LIBFT_DIR) clean
 	@rm -f $(NAME) $(BONUS)
-	@echo -e "\033[32mExecutable removed successfully\033[0m"
+	@echo -e "\033[33m✘ Executables removed\033[0m"
 
 re: fclean all
 

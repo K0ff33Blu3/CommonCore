@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:15:30 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/28 16:49:38 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/01 14:33:27 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 int	on_keypress(int keysym, t_fractal *fractal)
 {
+	static int	i;
+
 	if (keysym == XK_Escape)
 		close_display(fractal);
-	else if (keysym == ARROW_UP || keysym == ARROW_DOWN
+	if (keysym == ARROW_UP || keysym == ARROW_DOWN
 		|| keysym == ARROW_LEFT || keysym == ARROW_RIGHT)
 		move(fractal, keysym);
+	if (keysym == C_KEY)
+		set_color(fractal, ++i);
 	if (!ft_strncmp(fractal->name, "mandelbrot", 10))
 		put_mandelbrot(fractal);
 	else if (!ft_strncmp(fractal->name, "julia", 5))
@@ -26,6 +30,18 @@ int	on_keypress(int keysym, t_fractal *fractal)
 	else if (!ft_strncmp(fractal->name, "burning ship", 12))
 		put_burning_ship(fractal);
 	return (0);
+}
+
+void	set_color(t_fractal *fractal, int i)
+{
+	if (i % 4 == 0)
+		fractal->color = COLOR0;
+	else if (i % 4 == 1)
+		fractal->color = COLOR1;
+	else if (i % 4 == 2)
+		fractal->color = COLOR2;
+	else if (i % 4 == 3)
+		fractal->color = COLOR3;
 }
 
 void	move(t_fractal *fractal, int keysym)

@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:05:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/30 15:39:42 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/01 14:31:33 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_fractal(t_fractal *fractal)
 	fractal->zx = 0;
 	fractal->zy = 0;
 	fractal->zoom = 100;
-	fractal->color = COLOR;
+	fractal->color = COLOR0;
 	fractal->offset_x = 0;
 	fractal->offset_y = 0;
 	fractal->max_iteration = MAX_ITER;
