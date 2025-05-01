@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:30:53 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/01 14:35:24 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/01 14:37:54 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <float.h>
 # include <stddef.h>
 # include <unistd.h>
 # include "libft/libft.h"
