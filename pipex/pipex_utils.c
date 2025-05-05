@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:39:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/22 16:09:09 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/05 14:40:03 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ void	close_std(void)
 	close(STDERR_FILENO);
 }
 
-void	cmd_not_found(t_pipex pipex)
+void	cmd_not_found(t_pipex *pipex)
 {
-	ft_putstr_fd(pipex.cmd, STDERR_FILENO);
+
+	ft_putstr_fd(pipex->cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	ft_free((void **)pipex.cmd_args, -1);
-	ft_free((void **)pipex.all_cmds, -1);
-	close(pipex.out_fd);
+	ft_free((void **)pipex->cmd_args, -1);
+	ft_free((void **)pipex->all_cmds, -1);
+	close(pipex->out_fd);
+	close_pipe(pipex);
 	close_std();
-	free(pipex.cmd_path);
-	free(pipex.cmd);
+	free(pipex->cmd_path);
+	free(pipex->cmd);
 	exit(127);
 }
 
@@ -55,9 +57,9 @@ void	parse_cmd(t_pipex *pipex, char *cmd, char **envp)
 		ft_error("Split fallita");
 	}
 	pipex->cmd = ft_strdup(pipex->cmd_args[0]);
-	pipex->cmd_path = find_cmd_path(*pipex, envp);
+	pipex->cmd_path = find_cmd_path(pipex, envp);
 	if (!pipex->cmd_path)
-		cmd_not_found(*pipex);
+		cmd_not_found(pipex);
 	free(pipex->cmd_args[0]);
 	pipex->cmd_args[0] = ft_strdup(pipex->cmd_path);
 }

@@ -6,23 +6,23 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/04/30 19:02:27 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/05 14:39:43 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	close_pipe(t_pipex pipex)
+void	close_pipe(t_pipex *pipex)
 {
-	close(pipex.pipe[0]);
-	close(pipex.pipe[1]);
+	close(pipex->pipe[0]);
+	close(pipex->pipe[1]);
 }
 
 static void	last_child(t_pipex *pipex, char *cmd, char *outfile, char **envp)
 {
 	parse_cmd(pipex, cmd, envp);
 	dup2(pipex->pipe[0], STDIN_FILENO);
-	if (access(outfile, W_OK) == -1)
+	if (pipex->out_fd < 0 || access(outfile, W_OK) == -1)
 	{
 		ft_free((void **)pipex->cmd_args, -1);
 		ft_free((void **)pipex->all_cmds, -1);
@@ -32,7 +32,7 @@ static void	last_child(t_pipex *pipex, char *cmd, char *outfile, char **envp)
 	}
 	dup2(pipex->out_fd, STDOUT_FILENO);
 	close(pipex->out_fd);
-	close_pipe(*pipex);
+	close_pipe(pipex);
 	exec_command(*pipex, envp);
 }
 
@@ -48,13 +48,14 @@ void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 	if (pid == 0)
 	{
 		dup2(pipex->pipe[1], STDOUT_FILENO);
-		close_pipe(*pipex);
-		close(pipex->out_fd);
+		close_pipe(pipex);
+		if (!(pipex->out_fd < 0))
+			close(pipex->out_fd);
 		parse_cmd(pipex, cmd, envp);
 		exec_command(*pipex, envp);
 	}
 	else
-	{
+	{	
 		close(pipex->pipe[1]);
 		dup2(pipex->pipe[0], STDIN_FILENO);
 		close(pipex->pipe[0]);
@@ -77,9 +78,9 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 		last_child(&pipex, pipex.all_cmds[pipex.n_cmd - 1],
 			argv[argc - 1], envp);
 	close(pipex.out_fd);
+	waitpid(pid2, &status2, 0);
 	close_std();
 	ft_free((void **)pipex.all_cmds, -1);
-	waitpid(pid2, &status2, 0);
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))
 		exit(WEXITSTATUS(status2));
 }
