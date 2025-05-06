@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:03:52 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/05 14:39:43 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/06 13:24:20 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 		exec_command(*pipex, envp);
 	}
 	else
-	{	
+	{
 		close(pipex->pipe[1]);
 		dup2(pipex->pipe[0], STDIN_FILENO);
 		close(pipex->pipe[0]);
@@ -81,6 +81,8 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 	waitpid(pid2, &status2, 0);
 	close_std();
 	ft_free((void **)pipex.all_cmds, -1);
+	while (wait(NULL) != -1)
+		;
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))
 		exit(WEXITSTATUS(status2));
 }

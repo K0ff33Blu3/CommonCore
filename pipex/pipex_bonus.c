@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:50:19 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/05 14:13:50 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/06 12:43:36 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	close_pipe(t_pipex *pipex)
 {
-	close(pipex.pipe[0]);
-	close(pipex.pipe[1]);
+	close(pipex->pipe[0]);
+	close(pipex->pipe[1]);
 }
 
 static void	last_child(t_pipex *pipex, char *cmd, char *outfile, char **envp)
@@ -39,8 +39,6 @@ static void	last_child(t_pipex *pipex, char *cmd, char *outfile, char **envp)
 void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 {
 	pid_t	pid;
-	// int		status;			// ricordati di toglierlo
-
 
 	if (pipe(pipex->pipe) == -1)
 		ft_error("pipe");
@@ -58,7 +56,6 @@ void	ft_fork(t_pipex *pipex, char *cmd, char **envp)
 	}
 	else
 	{
-		// waitpid(pid, &status, 0);		// ricordati di toglierlo
 		close(pipex->pipe[1]);
 		dup2(pipex->pipe[0], STDIN_FILENO);
 		close(pipex->pipe[0]);
@@ -81,9 +78,9 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 		last_child(&pipex, pipex.all_cmds[pipex.n_cmd - 1],
 			argv[argc - 1], envp);
 	close(pipex.out_fd);
+	waitpid(pid2, &status2, 0);
 	close_std();
 	ft_free((void **)pipex.all_cmds, -1);
-	waitpid(pid2, &status2, 0);
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))
 		exit(WEXITSTATUS(status2));
 }
