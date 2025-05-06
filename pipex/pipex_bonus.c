@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:50:19 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/06 12:43:36 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/06 13:28:48 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static void	run_pipex(t_pipex pipex, int argc, char **argv, char **envp)
 	close(pipex.out_fd);
 	waitpid(pid2, &status2, 0);
 	close_std();
+	while (wait(NULL) != -1)
+		;
 	ft_free((void **)pipex.all_cmds, -1);
 	if (WIFEXITED(status2) && WEXITSTATUS(status2))
 		exit(WEXITSTATUS(status2));
