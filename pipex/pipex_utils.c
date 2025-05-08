@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 15:39:02 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/05 14:40:03 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/07 14:00:39 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	close_std(void)
 
 void	cmd_not_found(t_pipex *pipex)
 {
-
 	ft_putstr_fd(pipex->cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	ft_free((void **)pipex->cmd_args, -1);

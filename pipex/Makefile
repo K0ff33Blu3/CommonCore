@@ -1,55 +1,70 @@
-NAME        = pipex
-BONUS_NAME  = pipex_bonus
+# Nome degli eseguibili
+NAME         = pipex
+BONUS_NAME   = pipex_bonus
 
-CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g
+# Compilatore e flags
+CC           := cc
+CFLAGS       := -Wall -Wextra -Werror -g
 
-LIBFT_DIR   = libft
-LIBFT_LIB   = $(LIBFT_DIR)/libft.a
+# Directory
+LIBFT_DIR    := libft
+OBJS_DIR     := obj
 
-SRCS        = pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
-SRCS_BONUS  = pipex_bonus.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
+# Libreria
+LIBFT_LIB    := $(LIBFT_DIR)/libft.a
 
-OBJS        = $(SRCS:.c=.o)
-OBJS_BONUS  = $(SRCS_BONUS:.c=.o)
+# Sorgenti
+SRCS         := pipex.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
+SRCS_BONUS   := pipex_bonus.c find_cmd_path.c str_split.c str_split_utils.c pipex_utils.c docs.c
 
-# Default
+# Oggetti (con prefisso obj/)
+OBJS         := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRCS))
+OBJS_BONUS   := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRCS_BONUS))
+
+# Regola di default
 all: $(NAME)
 
-# Compile base version
-$(NAME): $(OBJS) $(LIBFT_LIB)
-	@$(CC) $(CFLAGS) $^ -o $@ -L$(LIBFT_DIR) -lft
-	@echo -e "\033[32m$(NAME) created successfully!\033[0m"
+# --- 1) Creazione dell’executable base ---
+# Assicuriamoci che obj/ esista, poi linkiamo
+$(NAME): $(OBJS) $(LIBFT_LIB) | $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $^ -o $(NAME) -L$(LIBFT_DIR) -lft
+	@echo -e "\033[32m$(NAME) created!\033[0m"
 
-# Compile bonus version
+# --- 2) Versione bonus ---
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(OBJS_BONUS) $(LIBFT_LIB)
-	@$(CC) $(CFLAGS) $^ -o $@ -L$(LIBFT_DIR) -lft
+$(BONUS_NAME): $(OBJS_BONUS) $(LIBFT_LIB) | $(OBJS_DIR)
+	@$(CC) $(CFLAGS) $^ -o $(BONUS_NAME) -L$(LIBFT_DIR) -lft
 	@echo -e "\033[36m$(BONUS_NAME) compiled with bonus powers!\033[0m"
 
-# Object compilation
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo -e "\033[90mCompiled $<\033[0m"
+# --- 3) Rule per creare la cartella obj/
+$(OBJS_DIR):
+	@mkdir -p $@
 
-# Libft build
+# --- 4) Regola pattern per compilare ogni .c in obj/*.o
+#     $< = file .c di input, $@ = obj/foo.o
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -e "\033[90m$< compiled\033[0m"
+
+# --- 5) Compilazione della libft ---
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
 
-# Clean .o files
+# --- 6) Pulizia oggetti ---
 clean:
 	@make -C $(LIBFT_DIR) clean
-	@rm -f $(OBJS) $(OBJS_BONUS)
-	@echo -e "\033[33mObject files removed.\033[0m"
+	@rm -rf $(OBJS_DIR)
+	@echo -e "\033[33mObjects removed.\033[0m"
 
-# Full clean
+# --- 7) Pulizia completa (oggetti + binari) ---
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME) $(BONUS_NAME)
-	@echo -e "\033[31mBinaries wiped.\033[0m"
+	@echo -e "\033[31mBinaries wiped\033[0m"
 
-# Full rebuild
+# --- 8) Rebuild ---
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all bonus clean fclean re

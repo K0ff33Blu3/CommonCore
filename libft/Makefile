@@ -18,7 +18,8 @@ SRCS = ft_atoi.c ft_itoa.c ft_putendl_fd.c ft_strjoin.c ft_strtrim.c ft_bzero.c 
 		array_size.c \
 
 # File oggetto
-OBJS = $(SRCS:.c=.o)
+OBJS_DIR = obj
+OBJS         := $(patsubst %.c,$(OBJS_DIR)/%.o,$(SRCS))
 
 FT_PRINTF = ft_printf/libftprintf.a
 
@@ -27,30 +28,36 @@ all: $(NAME)
 
 # dichiara che libft.a dipende dai file oggetto  
 $(NAME) : $(OBJS) $(FT_PRINTF)
-	ar x $(FT_PRINTF)
-	ar rc $@ $?
-#	rm -f *.o
-	@echo -e "\033[32m\nLibrary $(NAME) created successfully\033[0m"
+	@ar x $(FT_PRINTF)
+	@ar rc $@ $?
+	@echo -e "\033[32m\n$(NAME) created!\033[0m"
+
+$(OBJS_DIR):
+	@mkdir -p $@
 
 #compilazione dei file.c in file.o
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -e "\033[90m$< compiled\033[0m"
+
 
 #creazione di ft_printf.a
 $(FT_PRINTF):
-	$(MAKE) -C ft_printf
+	@$(MAKE) -C ft_printf
 	
 #rimozione dei file oggetto
 clean:
-	$(MAKE) clean -C ft_printf
-	rm -f *.o
-	@echo -e "\033[32m\nObject files removed successfully\033[0m"
+	@$(MAKE) clean -C ft_printf
+	@rm -rf $(OBJS_DIR)
+	@rm -f *.o
+	@echo -e "\033[33mObjects removed.\033[0m"
 
 #rimozione di file oggetto e libreria
 fclean: clean
 	$(MAKE) fclean -C ft_printf
-	rm -f $(NAME)
-	@echo -e "\033[32m\nLibrary $(NAME) removed successfully\033[0m"
+	@rm -f $(NAME)
+	@echo -e "\033[31m$(NAME) wiped\033[0m"
 
 #ricompilazione completa
 re: fclean all
