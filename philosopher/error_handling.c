@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 15:51:21 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/08 15:52:53 by miricci          ###   ########.fr       */
+/*   Created: 2025/05/24 13:45:56 by miricci           #+#    #+#             */
+/*   Updated: 2025/05/24 14:20:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
+#include "philo.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <pthread.h>
+int	error_message(char *s)
+{
+	
+	while (s)
+		write(STDERR_FILENO, s++, 1);
+	write(STDERR_FILENO, " ERROR\n", 7); 
+}
 
-#endif
+void	clean(t_data *data, t_philo **philo)
+{
+	if (data->fork)
+		ft_free((void **)data->fork, -1);
+	if (data)
+		free(data);
+	if (philo)
+		ft_free((void **)philo, -1);
+}
