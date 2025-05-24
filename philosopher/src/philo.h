@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 15:51:21 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/24 14:15:43 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/24 18:33:39 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,26 @@ typedef struct s_philo
 	int	philo_id;
 	int	death_time;
 	int	meals;
+	int	is_eating;
+	int	is_dead;
 	t_fork	*fork_l;
 	t_fork	*fork_r;
 }	t_philo;
 
-t_philo	**init_threads(t_data *data);
+t_philo	*init_threads(t_data *data);
 void	*routine(void *philo);
 t_data		*parsing(int size, char **array);
 t_fork	**init_forks(int nbr);
-t_philo	*init_philo(t_data *data, int i);
+t_philo	init_philo(t_data *data, int i);
 void	eating(t_philo *philo);
 void	thinking(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	take_fork(t_philo *philo);
 void	print_action(t_philo *philo, const char *action);
-int	error_message(char *s);
-void	clean(t_data *data, t_philo **philo);
+void	error_message(char *s);
+void	clear_data(t_data *data, t_philo *philo);
+void	die(t_philo *philo);
+void	ft_exit(t_data *data, t_philo *philo);
 
 // utils.c
 int	ft_atoi(const char *nptr);

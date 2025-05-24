@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:00:27 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/24 14:23:50 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/24 16:30:35 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_data		*parsing(int size, char **array)
 {
 	t_data		*data;
-	
+
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
@@ -35,7 +35,7 @@ t_fork	**init_forks(int nbr)
 {
 	t_fork	**fork;
 	int		i;
-	
+
 	fork = (t_fork **)malloc(sizeof(t_fork *) * nbr);
 	i = 0;
 	while (i < nbr)
@@ -47,4 +47,5 @@ t_fork	**init_forks(int nbr)
 		pthread_mutex_init(&fork[i]->mutex, NULL);
 		i++;
 	}
+	return (fork);
 }
