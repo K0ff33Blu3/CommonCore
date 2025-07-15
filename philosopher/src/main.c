@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:57:23 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/24 18:41:09 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/25 15:19:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ void	*routine(void *philo_void)
 	while (1)
 	{
 		if (philo->meals >= philo->data->times_philo_must_eat || philo->is_dead)
-			return (1);
+		{
+			printf("philo %d meals: %d\n", philo->philo_id, philo->meals);
+			printf("philo %d is dead %d\n", philo->philo_id, philo->is_dead);
+			return ((void *)1);
+		}
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
-		printf("philo %d is dead %d\n", philo->philo_id, philo->is_dead);
 	}
 	if (pthread_detach(tid))
 		return (error_message("DETACH THREAD"), NULL);
@@ -67,8 +70,8 @@ t_philo	init_philo(t_data *data, int i)
 	philo.is_eating = 0;
 	philo.is_dead = 0;
 	philo.death_time = get_time() + data->time_to_die;
-	philo.fork_l = data->fork[i];
-	philo.fork_r = data->fork[(i + 1) % data->nbr_philo];
+	philo.fork_l = &(data->fork[i]);
+	philo.fork_r = &(data->fork[(i + 1) % data->nbr_philo]);
 	return (philo);
 }
 
@@ -92,7 +95,7 @@ t_philo	*init_threads(t_data *data)
 	i = -1;
 	while (++i < data->nbr_philo)
 	{
-		if (pthread_join(th[i], ))
+		if (pthread_join(th[i], NULL))
 			return (error_message("JOIN THREAD"), NULL);
 	}
 	free(th);

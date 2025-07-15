@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:07:58 by miricci           #+#    #+#             */
-/*   Updated: 2025/05/24 14:16:53 by miricci          ###   ########.fr       */
+/*   Updated: 2025/05/25 15:17:23 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,31 @@ void	ft_free(void **s, int i)
 	free(s);
 }
 
-int	get_time()
+unsigned int	get_time()
 {
 	struct timeval tv;
 	
 	gettimeofday(&tv, NULL);
 	return(tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
+
+int	ft_usleep(unsigned int time)
+{
+	unsigned int	start;
+	unsigned int	time_in_ms;
+	
+	time_in_ms = time / 1000;
+	start = get_time(); // ritorna tempo in millisecondi
+	while ((get_time() - start) < time_in_ms)
+	{
+		if ((time_in_ms - (get_time() - start)) > 5)
+			ft_usleep(1000); // dorme 1 millisecondo = 1000 microsecondi
+		// else
+		// 	; // busy-wait per gli ultimi millisecondi
+	}
+	return (0);
+}
+
 void	print_action(t_philo *philo, const char *action)
 {
 	printf("%d %d %s\n", get_time(), philo->philo_id, action);
