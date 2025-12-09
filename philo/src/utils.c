@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 15:35:29 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/04 15:36:07 by miricci          ###   ########.fr       */
+/*   Updated: 2025/12/09 12:16:31 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,34 @@ int	ft_atoi(const char *nptr)
 	return (sgn * nbr);
 }
 
-void	ft_free(void **s, int i)
+void	ft_free(void **s, void (*clean)(void *), int size)
 {
-	int	j;
+	while (--size >= 0)
+		(clean)(s[size]);
+	free(s);
+}
 
-	if (i == -1)
+void	print_action(t_philo *philo, char *action)
+{
+	t_data	*data;
+
+	data = (t_data *)philo->data;
+	pthread_mutex_lock(&(data->write_lock));
+	if (!get_someonedied(philo))
+		printf("%ld %d %s\n", get_time(), philo->id, action);
+	pthread_mutex_unlock(&(data->write_lock));
+}
+
+void	handle_deadlock(t_philo *philo, void (*func)(t_philo *, t_fork *))
+{
+	if (philo->id % 2)
 	{
-		j = 0;
-		while (s[j])
-			free(s[j++]);
+		func(philo, philo->right_fork);
+		func(philo, philo->left_fork);
 	}
 	else
 	{
-		while (--i >= 0)
-			free(s[i]);
+		func(philo, philo->left_fork);
+		func(philo, philo->right_fork);
 	}
-	free(s);
 }
