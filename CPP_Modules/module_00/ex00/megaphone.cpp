@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 12:33:29 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/23 15:58:28 by miricci          ###   ########.fr       */
+/*   Updated: 2025/12/21 12:54:08 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	main(int argc, char **argv) {
 	// controllo sul numero di argomenti
 	if (argc != 2) {
-		std::cerr << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		std::cerr << "Inserire un argomento\n";
 		return 1;
 	}
 	// assegnazione di dell'argomento a s

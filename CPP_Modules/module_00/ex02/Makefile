@@ -1,10 +1,10 @@
-NAME =  megaphone
+NAME = shittyJob
 
 CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = megaphone.cpp
+SRC = tests.cpp Account.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -25,3 +25,5 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@echo -e "\033[33m✘ $(NAME) removed\033[0m" 
+
+re: fclean all
