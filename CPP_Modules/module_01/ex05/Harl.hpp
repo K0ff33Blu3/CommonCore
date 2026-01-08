@@ -1,20 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/22 17:13:35 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/22 17:14:56 by miricci          ###   ########.fr       */
+/*   Created: 2026/01/07 18:46:14 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/07 21:00:56 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HARL_HPP
+# define HARL_HPP
 
-void randomChump( std::string name ) {
+# include <iostream>
+# include <string>
+
+class Harl
+{
+private:
+	void	debug( void );
+	void	info( void );
+	void	warning( void );
+	void	error( void );
 	
-	Zombie	zombie(name);
+	typedef	void (Harl::*Handler)();
+	
+	struct Entry
+	{
+		std::string	string;
+		Handler			fn;
+	};
+	
+	Entry table[4];
+	
+public:
+	Harl();
+	~Harl();
+		
+	void	complain( std::string level );
+};
 
-	zombie.announce();
-}
+#endif

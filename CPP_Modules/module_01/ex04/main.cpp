@@ -35,15 +35,12 @@ int	main( int argc, char **argv ) {
 	while (std::getline(infile, buffer)) {
 		
 		size_t pos = 0;
-		// std::clog << buffer << std::endl;
 		while (1) {
 			size_t start = buffer.find(s1, pos);
 			if (start == std::string::npos)
 				break ;
 			buffer.erase(start, s1.length());
-			// std::clog << buffer << std::endl;
 			buffer.insert(start, s2);
-			// std::clog << buffer << std::endl;
 			pos += s2.length();
 		}
 		outfile << buffer << std::endl;

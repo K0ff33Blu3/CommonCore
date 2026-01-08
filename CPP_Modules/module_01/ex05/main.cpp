@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/22 17:13:35 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/22 17:14:56 by miricci          ###   ########.fr       */
+/*   Created: 2026/01/07 18:45:55 by miricci           #+#    #+#             */
+/*   Updated: 2026/01/07 21:01:36 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Harl.hpp"
 
-void randomChump( std::string name ) {
+int	main( void ) {
+
+	std::string	entry;
+	Harl	harl;
 	
-	Zombie	zombie(name);
-
-	zombie.announce();
+	std::cout << "Welcome to Harl's Karen phase. Please insert the kind of complain you'd like to make." << std::endl;
+	std::cin >> entry;
+	harl.complain("info");
 }
