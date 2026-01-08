@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:46:22 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/07 21:06:26 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/08 15:48:56 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ Harl::Harl() {
 	std::cout << "Harl is born." << std::endl;
 	
 	Harl::table[0].string = "debug"; Harl::table[0].fn = &Harl::debug;
-	Harl::table[1].string = "info"; Harl::table[0].fn = &Harl::info;
-	Harl::table[2].string = "warning"; Harl::table[0].fn = &Harl::warning;
-	Harl::table[3].string = "error"; Harl::table[0].fn = &Harl::error;
+	Harl::table[1].string = "info"; Harl::table[1].fn = &Harl::info;
+	Harl::table[2].string = "warning"; Harl::table[2].fn = &Harl::warning;
+	Harl::table[3].string = "error"; Harl::table[3].fn = &Harl::error;
 	
 	return ;
 }

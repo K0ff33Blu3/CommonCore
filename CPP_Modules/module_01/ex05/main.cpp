@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:45:55 by miricci           #+#    #+#             */
-/*   Updated: 2026/01/07 21:01:36 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/08 15:49:32 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int	main( void ) {
 	
 	std::cout << "Welcome to Harl's Karen phase. Please insert the kind of complain you'd like to make." << std::endl;
 	std::cin >> entry;
-	harl.complain("info");
+	harl.complain(entry);
 }
