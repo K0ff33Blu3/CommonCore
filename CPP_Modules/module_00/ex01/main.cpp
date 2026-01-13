@@ -6,12 +6,12 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 13:18:41 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/22 19:00:23 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/13 12:33:44 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Contact.class.hpp"
-#include "PhoneBook.class.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 bool	isDigitOnly(std::string str) {
 	for (std::string::iterator it = str.begin(); it < str.end(); ++it) {

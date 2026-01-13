@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.class.hpp                                :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 14:27:33 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/22 23:30:31 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/13 12:33:04 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sstream>
 # include <iomanip>
 
-# include "Contact.class.hpp"
+# include "Contact.hpp"
 
 class PhoneBook {
 	public:

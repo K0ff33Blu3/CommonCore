@@ -6,7 +6,7 @@
 /*   By: miricci <miricci@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 21:15:51 by miricci           #+#    #+#             */
-/*   Updated: 2025/12/27 13:47:52 by miricci          ###   ########.fr       */
+/*   Updated: 2026/01/13 17:11:11 by miricci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Account::Account( int initial_deposit ) {
 }
 
 Account::~Account( void ) {
-	Account::_nbAccounts++;
+	Account::_nbAccounts--;
 	Account::_displayTimestamp();
 	std::cout
 			<< "index:" << this->_accountIndex
@@ -85,7 +85,7 @@ void	Account::makeDeposit( int deposit ) {
 	Account::_totalAmount += deposit;
 	Account::_totalNbDeposits++;
 	std::cout
-			<< ";deposits:" << deposit
+			<< ";deposit:" << deposit
 			<< ";amount:" << this->_amount
 			<< ";nb_deposits:" << this->_nbDeposits
 			<< std::endl;
@@ -117,7 +117,7 @@ bool	Account::makeWithdrawal( int withdrawal ) {
 
 int		Account::checkAmount( void ) const{
 	
-	return (Account::_totalAmount);
+	return (this->_amount);
 }
 
 void	Account::displayStatus( void )const {
